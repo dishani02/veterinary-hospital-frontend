@@ -1,34 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Route, Routes } from "react-router";
+import AppLayout from './components/layouts/app-layout';
+import GuestLayout from './components/layouts/guest-layout';
+
+import Login from "./auth/login";
+
+//customer pages
+import Dashboard from "./app/dashboard";
+import Appointments from "./app/appointments/appointments";
+import BookAppointment from "./app/appointments/book-appointment";
+import AppointmentConfirmation from "./app/appointments/appointment-confirmation";
+import Shop from "./app/shop/shop";
+import Cart from "./app/shop/cart";
+import ProductView from "./app/shop/product-view";
+
+//admin pages
+import Orders from "./admin/order/orders";
+import ViewOrder from "./admin/order/view-order";
+import Products from "./admin/order/products";
+import CreateProduct from "./admin/order/create-product";
+import EditProduct from "./admin/order/edit-product";
+import AdminAppointments from "./admin/appointments/appointments";
+import ViewAppointment from "./admin/appointments/view-appointment";
+import AdminDashboard from "./admin/dashboard";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="auth" element={<GuestLayout />}>
+          <Route path="login" element={<Login />} />
+        </Route>
+
+        <Route path="app" element={<AppLayout />}>
+          <Route path="dashboard" element={<Dashboard />} />
+
+          <Route path="appointments">
+            <Route index element={<Appointments />} />
+            <Route path="book" element={<BookAppointment />} />
+            <Route path="confirm" element={<AppointmentConfirmation />} />
+          </Route>
+
+          <Route path="shop">
+            <Route index element={<Shop />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path=":productId" element={<ProductView />} />
+          </Route>
+        </Route>
+
+        <Route path="admin">
+          <Route path="dashboard" element={<AdminDashboard/>}/>
+          <Route path="orders">
+            <Route index element={<Orders />} />
+            <Route path=":orderId" element={<ViewOrder />} />
+          </Route>
+
+          <Route path="products">
+            <Route index element={<Products />} />
+            <Route path="create" element={<CreateProduct />} />
+            <Route path=":productId" element={<EditProduct />} />
+          </Route>
+
+          <Route path="appointments">
+            <Route index element={<AdminAppointments/>}/>
+            <Route path=":/appointmentId" element={<ViewAppointment/>}/>
+          </Route>
+
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
