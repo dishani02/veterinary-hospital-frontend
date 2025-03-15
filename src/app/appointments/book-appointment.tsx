@@ -3,6 +3,7 @@ import TextArea from 'antd/es/input/TextArea'
 import { ChevronRight } from 'lucide-react'
 import { Link } from 'react-router'
 
+
 const BookAppointment = () => {
   return (
     <div className='!space-y-4'>
@@ -45,15 +46,19 @@ const BookAppointment = () => {
           <Form.Item
             label="Date"
             name="date"
-            rules={[
-              {
+             rules={[
+             {
                 required: true,
                 message: "Date is required"
               }
             ]}
-          >
-            <DatePicker className='w-full' />
-          </Form.Item>
+>
+            <DatePicker 
+              className='w-full' 
+              disabledDate={(current) => current && current < moment().endOf('day')} 
+          />
+        </Form.Item>
+
 
           <Form.Item
             label="Time"

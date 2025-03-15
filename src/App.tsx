@@ -22,6 +22,7 @@ import EditProduct from "./admin/order/edit-product";
 import AdminAppointments from "./admin/appointments/appointments";
 import ViewAppointment from "./admin/appointments/view-appointment";
 import AdminDashboard from "./admin/dashboard";
+import AdminLayout from "./components/layouts/admin-layout";
 
 function App() {
   return (
@@ -47,7 +48,7 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="admin">
+        <Route path="admin" element={<AdminLayout/>}>
           <Route path="dashboard" element={<AdminDashboard/>}/>
           <Route path="orders">
             <Route index element={<Orders />} />
@@ -62,7 +63,7 @@ function App() {
 
           <Route path="appointments">
             <Route index element={<AdminAppointments/>}/>
-            <Route path=":/appointmentId" element={<ViewAppointment/>}/>
+            <Route path=":appointmentId" element={<ViewAppointment/>}/>
           </Route>
 
         </Route>
