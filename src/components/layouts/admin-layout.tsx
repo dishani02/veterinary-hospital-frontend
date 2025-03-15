@@ -1,9 +1,9 @@
 
 import { Link, Outlet } from 'react-router'
-import { Avatar, Badge, Layout, Menu } from 'antd';
-import { LayoutDashboard, ShoppingBag, ShoppingCart, Stethoscope, UserRound } from 'lucide-react';
+import { Avatar, Layout, Menu } from 'antd';
+import { LayoutDashboard, Stethoscope, UserRound } from 'lucide-react';
 
-const AppLayout = () => {
+const AdminLayout = () => {
 
   const { Header, Content, Footer, Sider } = Layout;
   const size = 18;
@@ -26,27 +26,19 @@ const AppLayout = () => {
             {
               key: 0,
               icon: <LayoutDashboard size={size} />,
-              label: <Link to="/app/dashboard">Dashboard</Link>
+              label: <Link to="/admin/dashboard">Dashboard</Link>
             },
             {
               key: 1,
               icon: <Stethoscope size={size} />,
-              label: <Link to="/app/appointments">Appointments</Link>
+              label: <Link to="/admin/appointments">Appointments</Link>
             },
-            {
-              key: 2,
-              icon: <ShoppingBag size={size} />,
-              label: <Link to="/app/shop">Shop</Link>
-            }
+            
           ]} />
       </Sider>
       <Layout>
         <Header className="!bg-white flex justify-end items-center gap-x-4">
-          <Link to={'/app/shop/cart'} className='flex item-center'>
-            <Badge count={5} className='flex item-center'>
-              <ShoppingCart size={22} className='cursor-pointer text-black' />
-            </Badge>
-          </Link>
+          
           <div className="flex items-center gap-2">
             <Avatar size={35} icon={<UserRound size={14} />} />
             <h2>Hi, Dishani</h2>
@@ -63,4 +55,4 @@ const AppLayout = () => {
   )
 }
 
-export default AppLayout
+export default AdminLayout

@@ -1,9 +1,65 @@
-import React from 'react'
+import { Button, Form, Input, Table } from 'antd'
+import { ChevronRight } from 'lucide-react'
+import { Link, useNavigate } from 'react-router'
 
-const ViewAppointment = () => {
+const Appointments = () => {
+  const navigate = useNavigate();
+
+  const columns = [
+    {
+      key: "appointmentId",
+      title: "Appointment Id",
+      dataIndex: "appointmentId"
+    },
+    {
+      key: "petowner",
+      title: "Pet Owner",
+      dataIndex: "petowner"
+    },
+    {
+      key: "veterinarian",
+      title: "Veterinarian",
+      dataIndex: "veterinarian"
+    },
+    {
+      key: "date",
+      title: "Date",
+      dataIndex: "date"
+    },
+    {
+      key: "time",
+      title: "Time",
+      dataIndex: "time"
+    },
+    {
+      key: "status",
+      title: "Status",
+      dataIndex: "status"
+    }
+  ]
   return (
-    <div>ViewAppointment</div>
+    <div className='!space-y-4'>
+      <div className="flex items-center">
+        <Link to="/app/dashboard" className='!text-black'>Home</Link>
+        <ChevronRight size={16} />
+        <h2>Appointments</h2>
+      </div>
+
+      <div className="bg-white !p-3">
+        <div className="flex justify-between items-center">
+          <div className="flex">
+           <h2>Appointment Payment History</h2>
+          </div>
+        </div>
+
+        <Table
+          className='!my-5'
+          columns={columns}
+          
+        />
+      </div>
+    </div>
   )
 }
 
-export default ViewAppointment
+export default Appointments
