@@ -9,10 +9,10 @@ const columns = [
     key: "product",
     title: "Product Name",
     dataIndex: "product",
-    render:(value: string)=>{
+    render: (value: string) => {
       return <div className='flex items-center gap-5'>
-              <img src="https://m.media-amazon.com/images/I/71bNe7PVwrL._AC_UF1000,1000_QL80_.jpg" alt="" className='w-12' />
-              <h2>{value}</h2>
+        <img src="https://m.media-amazon.com/images/I/71bNe7PVwrL._AC_UF1000,1000_QL80_.jpg" alt="" className='w-12' />
+        <h2>{value}</h2>
       </div>
     }
   },
@@ -32,10 +32,10 @@ const columns = [
     dataIndex: "subtotal"
   },
   {
-    key:"action",
-    dataIndex:"action",
-    render:()=>{
-      return  <Button type="dashed" htmlType='button' >  <Trash2 /></Button>
+    key: "action",
+    dataIndex: "action",
+    render: () => {
+      return <Button type="dashed" htmlType='button' >  <Trash2 /></Button>
 
     }
   }
@@ -43,37 +43,37 @@ const columns = [
 
 const dataSource: any = [
   {
-    product:"Royal chain Fit",
-    price:"Rs.300.00",
-    Qty:"3",
-    subtotal:"Rs.900.00"
+    product: "Royal chain Fit",
+    price: "Rs.300.00",
+    Qty: "3",
+    subtotal: "Rs.900.00"
 
   },
   {
-    product:"Royal chain Fit",
-    price:"Rs.300.00",
-    Qty:"3",
-    subtotal:"Rs.900.00"
+    product: "Royal chain Fit",
+    price: "Rs.300.00",
+    Qty: "3",
+    subtotal: "Rs.900.00"
   },
   {
-    product:"Royal chain Fit",
-    price:"Rs.300.00",
-    Qty:"3",
-    subtotal:"Rs.900.00"
+    product: "Royal chain Fit",
+    price: "Rs.300.00",
+    Qty: "3",
+    subtotal: "Rs.900.00"
 
   },
   {
-    product:"Royal chain Fit",
-    price:"Rs.300.00",
-    Qty:"3",
-    subtotal:"Rs.900.00"
+    product: "Royal chain Fit",
+    price: "Rs.300.00",
+    Qty: "3",
+    subtotal: "Rs.900.00"
 
   },
   {
-    product:"Royal chain Fit",
-    price:"Rs.300.00",
-    Qty:"3",
-    subtotal:"Rs.900.00"
+    product: "Royal chain Fit",
+    price: "Rs.300.00",
+    Qty: "3",
+    subtotal: "Rs.900.00"
   }
 
 ];

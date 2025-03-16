@@ -66,6 +66,11 @@ function App() {
             <Route path=":appointmentId" element={<ViewAppointment/>}/>
           </Route>
 
+          <Route path="order">
+            <Route index element={<ViewOrder/>}/>
+            <Route path=":orderid" element={<ViewOrder/>}/>
+          </Route>
+
         </Route>
       </Routes>
     </BrowserRouter>
