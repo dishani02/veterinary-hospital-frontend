@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppLayout from './components/layouts/app-layout';
 import GuestLayout from './components/layouts/guest-layout';
 
@@ -12,6 +12,10 @@ import AppointmentConfirmation from "./app/appointments/appointment-confirmation
 import Shop from "./app/shop/shop";
 import Cart from "./app/shop/cart";
 import ProductView from "./app/shop/product-view";
+import Pet from "./app/pet/pet";
+import AddPet from "./app/pet/addpet";
+import EditPet from "./app/pet/editpet";
+import UserProfile from "./app/userprofile";
 
 //admin pages
 import Orders from "./admin/order/orders";
@@ -19,6 +23,10 @@ import ViewOrder from "./admin/order/view-order";
 import Products from "./admin/order/products";
 import CreateProduct from "./admin/order/create-product";
 import EditProduct from "./admin/order/edit-product";
+import Users from "./admin/user/user";
+import Staff from "./admin/staff/staff";
+import AddStaff from "./admin/staff/addstaff";
+import EditStaff from "./admin/staff/editstaff";
 import AdminAppointments from "./admin/appointments/appointments";
 import ViewAppointment from "./admin/appointments/view-appointment";
 import AdminDashboard from "./admin/dashboard";
@@ -33,6 +41,7 @@ function App() {
         </Route>
 
         <Route path="app" element={<AppLayout />}>
+          <Route path="user" element={<UserProfile/>}></Route>
           <Route path="dashboard" element={<Dashboard />} />
 
           <Route path="appointments">
@@ -46,10 +55,18 @@ function App() {
             <Route path="cart" element={<Cart />} />
             <Route path=":productId" element={<ProductView />} />
           </Route>
+
+          <Route path="pet">
+            <Route index element={<Pet />} />
+            <Route path="add" element={<AddPet />} />
+            <Route path="edit" element={<EditPet />} />
+            
+          </Route>
         </Route>
 
-        <Route path="admin" element={<AdminLayout/>}>
-          <Route path="dashboard" element={<AdminDashboard/>}/>
+        <Route path="admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<AdminDashboard />} />
+
           <Route path="orders">
             <Route index element={<Orders />} />
             <Route path=":orderId" element={<ViewOrder />} />
@@ -60,16 +77,25 @@ function App() {
             <Route path="create" element={<CreateProduct />} />
             <Route path=":productId" element={<EditProduct />} />
           </Route>
-
-          <Route path="appointments">
-            <Route index element={<AdminAppointments/>}/>
-            <Route path=":appointmentId" element={<ViewAppointment/>}/>
+          
+          <Route path="user-pet">
+            <Route index element={<Users />} />
           </Route>
 
+          <Route path="staff">
+            <Route index element={<Staff />} />
+            <Route  path="add" element={<AddStaff />} />
+            <Route  path="edit" element={<EditStaff />} />
+          </Route>
+
+          <Route path="appointments">
+            <Route index element={<AdminAppointments />} />
+            <Route path=":appointmentId" element={<ViewAppointment />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
