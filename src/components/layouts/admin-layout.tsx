@@ -36,27 +36,27 @@ const AdminLayout = () => {
             {
               key: 2,
               icon: <Ambulance size={size} />, 
-              label: <Link to="/app/services">Service Requests</Link>
+              label: <Link to="/admin/services">Service Requests</Link>
             },
             {
               key: 3,
               icon:  <ContactRound size={size} />,
-              label: <Link to="/admin/orders">Users and Pets</Link>
+              label: <Link to="/admin/user-pet">Users and Pets</Link>
             },
             {
-              key: 3,
+              key: 4,
               icon: <Users size={size}/>,
-              label: <Link to="/admin/orders">Staff Management</Link>
+              label: <Link to="/admin/staff">Staff Management</Link>
             },
             {
-              key: 3,
+              key: 5,
               icon: <ShoppingBag size={size} />,
               label: <Link to="/admin/orders">Shop</Link>
             },
             {
-              key: 3,
+              key: 6,
               icon:    <FileText size={size}/>,
-              label: <Link to="/admin/orders">Reports</Link>
+              label: <Link to="/admin/dashboard">Reports</Link>
             },
           ]} />
       </Sider>
