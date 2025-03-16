@@ -1,7 +1,7 @@
 
 import { Link, Outlet } from 'react-router'
 import { Avatar, Layout, Menu } from 'antd';
-import { LayoutDashboard, Stethoscope, UserRound } from 'lucide-react';
+import { Ambulance, ContactRound, FileText, LayoutDashboard, ShoppingBag, Stethoscope, UserRound, Users } from 'lucide-react';
 
 const AdminLayout = () => {
 
@@ -33,7 +33,31 @@ const AdminLayout = () => {
               icon: <Stethoscope size={size} />,
               label: <Link to="/admin/appointments">Appointments</Link>
             },
-            
+            {
+              key: 2,
+              icon: <Ambulance size={size} />, 
+              label: <Link to="/app/services">Service Requests</Link>
+            },
+            {
+              key: 3,
+              icon:  <ContactRound size={size} />,
+              label: <Link to="/admin/orders">Users and Pets</Link>
+            },
+            {
+              key: 3,
+              icon: <Users size={size}/>,
+              label: <Link to="/admin/orders">Staff Management</Link>
+            },
+            {
+              key: 3,
+              icon: <ShoppingBag size={size} />,
+              label: <Link to="/admin/orders">Shop</Link>
+            },
+            {
+              key: 3,
+              icon:    <FileText size={size}/>,
+              label: <Link to="/admin/orders">Reports</Link>
+            },
           ]} />
       </Sider>
       <Layout>
