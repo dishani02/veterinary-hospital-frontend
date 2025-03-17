@@ -2,6 +2,7 @@ import { Button, DatePicker, Form, Input, Select, TimePicker } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import { ChevronRight } from 'lucide-react'
 import { Link } from 'react-router'
+import moment from 'moment';
 
 
 const BookAppointment = () => {
@@ -27,7 +28,11 @@ const BookAppointment = () => {
               }
             ]}
           >
-            <Select placeholder="Select the Pet" />
+            <Select placeholder="Select the Pet" >
+              
+            </Select>
+
+
           </Form.Item>
 
           <Form.Item
@@ -40,7 +45,12 @@ const BookAppointment = () => {
               }
             ]}
           >
-            <Select placeholder="Select the Doctor" />
+            <Select placeholder="Select the Doctor" >
+            <option value="Dr.Roshan Perera">Dr.Roshan Perera</option>          
+            <option value="Dr.Roshan Perera">Dr.Amali Perera</option>
+
+            </Select>
+            
           </Form.Item>
 
           <Form.Item
@@ -51,11 +61,11 @@ const BookAppointment = () => {
                 required: true,
                 message: "Date is required"
               }
-            ]}
+            ]}                                                                                       
 >
             <DatePicker 
               className='w-full' 
-              disabledDate={(current) => current && current < moment().endOf('day')} 
+              disabledDate={(current) => current && current < moment().startOf('day')}  
           />
         </Form.Item>
 

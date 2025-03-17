@@ -54,7 +54,8 @@ const Appointments = () => {
         <Table
           className='!my-5'
           columns={columns}
-        />
+          />
+        
       </div>
     </div>
   )

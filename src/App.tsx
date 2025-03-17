@@ -13,6 +13,8 @@ import Shop from "./app/shop/shop";
 import Cart from "./app/shop/cart";
 import ProductView from "./app/shop/product-view";
 
+
+
 //admin pages
 import Orders from "./admin/order/orders";
 import ViewOrder from "./admin/order/view-order";
@@ -40,6 +42,7 @@ function App() {
             <Route path="book" element={<BookAppointment />} />
             <Route path="confirm" element={<AppointmentConfirmation />} />
           </Route>
+
 
           <Route path="shop">
             <Route index element={<Shop />} />
