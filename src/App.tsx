@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import AppLayout from './components/layouts/app-layout';
 import GuestLayout from './components/layouts/guest-layout';
-
 import Login from "./auth/login";
 
 //customer pages
@@ -36,6 +35,7 @@ import EditStaff from "./admin/staff/editstaff";
 import ViewStaff from "./admin/staff/viewstaff";
 import AdminAppointments from "./admin/appointments/appointments";
 import ViewAppointment from "./admin/appointments/view-appointment";
+import RescheduleAppointment from "./admin/appointments/reschedule-appointments";
 import Services from "./admin/services/services";
 import ViewServices from "./admin/services/viewservices";
 import AdminDashboard from "./admin/dashboard";
@@ -121,7 +121,8 @@ function App() {
           <Route path="appointments">
             <Route index element={<AdminAppointments />} />
             <Route path=":appointmentId" element={<ViewAppointment />} />
-          </Route>
+            <Route path="reschedule-appointments" element={<RescheduleAppointment />} />
+            </Route>
 
           <Route path="order">
             <Route index element={<ViewOrder />} />
@@ -132,7 +133,6 @@ function App() {
             <Route index element={<Services />} />
             <Route path=":serviceId" element={<ViewServices />} />
           </Route>
-
 
         </Route>
       </Routes>

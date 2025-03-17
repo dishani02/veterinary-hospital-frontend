@@ -13,19 +13,29 @@ const AppointmentConfirmation: FC = () => {
         <h2>Confirmation</h2>
       </div>
 
-      <div className='p-4 rounded-lg'>
-        <h2 className='text-lg font-semibold'>Appointment Summary</h2>
-        <div className='mt-2 space-y-2'>
-          <div>Pet Owner's Name: Dishani</div>
-          <div>Pet Name: Sam</div>
-          <div>Species & Breed: Cat</div>
-          <div>Appointment Date & Time: 20.03.2025</div>
-          <div>Doctor's Name: Dr. Roshan Perera</div>
-          <div>Reason for Appointment: Vaccination</div>
+      <div className='bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl'>
+        <h3 className='text-xl font-semibold text-gray-900 mb-4'>Appointment Summary</h3>
+        <div className='space-y-3'>
+          <div className='text-gray-700'>
+            <span className='font-medium'>Pet Owner's Name: </span>Dishani
+          </div>
+          <div className='text-gray-700'>
+            <span className='font-medium'>Pet Name: </span>Sam
+          </div>
+          <div className='text-gray-700'>
+            <span className='font-medium'>Species & Breed: </span>Cat
+          </div>
+          <div className='text-gray-700'>
+            <span className='font-medium'>Appointment Date & Time: </span>20.03.2025
+          </div>
+          <div className='text-gray-700'>
+            <span className='font-medium'>Doctor's Name: </span>Dr. Roshan Perera
+          </div>
+          <div className='text-gray-700'>
+            <span className='font-medium'>Reason for Appointment: </span>Vaccination
+          </div>
         </div>
       </div>
-
-      
     </div>
   );
 };
