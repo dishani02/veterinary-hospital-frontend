@@ -139,12 +139,10 @@ const Cart = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div> 
   );
-};
+ };
 
 export default Cart;
-function setQuantity(arg0: any) {
-  throw new Error('Function not implemented.');
-}
+
 

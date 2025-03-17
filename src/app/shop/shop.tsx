@@ -2,6 +2,7 @@ import { Button } from 'antd';
 import { ChevronRight } from 'lucide-react'
 import { Link } from 'react-router'
 
+
 const Shop = () => {
 
   const categories = [

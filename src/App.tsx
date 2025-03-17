@@ -64,7 +64,6 @@ function App() {
             <Route index element={<Shop />} />
             <Route path="cart" element={<Cart />} />
             <Route path=":productId" element={<ProductView />} />
-            
           </Route>
 
           <Route path="pet">
@@ -80,6 +79,8 @@ function App() {
             <Route path="confirm" element={<ServiceConfirmation />} />
 
           </Route>
+
+          
 
         </Route>
 
