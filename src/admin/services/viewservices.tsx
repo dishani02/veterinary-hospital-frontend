@@ -1,14 +1,14 @@
-import { Button, Input, Table, Select } from 'antd';
-import { ChevronRight } from 'lucide-react';
-import { Link } from 'react-router';
-
-const { Option } = Select;
+import { Button, Form, Input, Table } from 'antd'
+import { ChevronRight } from 'lucide-react'
+import { Link, useNavigate } from 'react-router'
 
 const Services = () => {
+  const navigate = useNavigate();
+
   const columns = [
     {
       key: "serviceId",
-      title: "Service ID",
+      title: "Service Id",
       dataIndex: "serviceId"
     },
     {
@@ -31,8 +31,8 @@ const Services = () => {
       title: "Status",
       dataIndex: "status"
     }
-  ];
-
+  ]
+  
   return (
     <div className='!space-y-4'>
       <div className="flex items-center">
@@ -44,19 +44,17 @@ const Services = () => {
       <div className="bg-white !p-3">
         <div className="flex justify-between items-center">
           <div className="flex">
-            <Input placeholder='Search by service ID' />
-            <Select placeholder="Filter by Service Type" className='ml-2'>
-              <Option value="Pet Taxi">Pet Taxi</Option>
-              <Option value="Pet Boarding">Pet Boarding</Option>
-              <Option value="Home Visit">Home Visit</Option>
-            </Select>
+            <h2>Available Services</h2>
           </div>
         </div>
+
+        <Table
+          className='!my-5'
+          columns={columns}
+        />
       </div>
-
-      <Table className='!my-5' columns={columns} />
     </div>
-  );
-};
+  )
+}
 
-export default Services;
+export default Services
