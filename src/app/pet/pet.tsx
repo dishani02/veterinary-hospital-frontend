@@ -1,6 +1,6 @@
 import { Button, Table, Input } from 'antd';
 import { ChevronRight } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 
 const Pet = () => {
   const navigate = useNavigate();

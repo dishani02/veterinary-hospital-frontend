@@ -1,6 +1,6 @@
 import { Button, Form, Input, Select, message } from 'antd';
 import { ChevronRight } from 'lucide-react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 
 const { Option } = Select;

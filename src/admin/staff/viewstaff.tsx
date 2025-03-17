@@ -1,6 +1,6 @@
 import { Button, Input, Table, Select } from 'antd';
 import { ChevronRight } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 
 const { Option } = Select;
 
