@@ -1,4 +1,4 @@
-import { Button, Form, Input, Table } from 'antd'
+import { Button, Input, Table } from 'antd'
 import { ChevronRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router'
 
@@ -54,8 +54,8 @@ const Appointments = () => {
         <Table
           className='!my-5'
           columns={columns}
-          />
-        
+        />
+
       </div>
     </div>
   )
