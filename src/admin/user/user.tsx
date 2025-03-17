@@ -1,6 +1,6 @@
 import { Button, Input, Table } from 'antd';
 import { ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const Users = () => {
   const columns = [

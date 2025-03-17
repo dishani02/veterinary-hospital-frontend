@@ -15,9 +15,9 @@ const Appointments = () => {
       dataIndex: "appointmentId"
     },
     {
-      key: "petOwner",
-      title: "Pet Owner",
-      dataIndex: "petOwner"
+      key: "petName",
+      title: "Pet Name",
+      dataIndex: "petName"
     },
     {
       key: "veterinarian",
@@ -38,9 +38,28 @@ const Appointments = () => {
       key: "status",
       title: "Status",
       dataIndex: "status",
+    },
+    {
+      key: "action",
+      title: "Action",
+      dataIndex: "action",
+      
     }
+    
   ];
 
+  const datasource: any =[
+    {
+      appointmentId : "001",
+      petName : "SAM",
+      veterinarian : "Dr.Roshan Perera",
+      date : "20.04.2025",
+      time : "04:00",
+      status : "Completed"
+      
+
+    },
+  ]
   return (
     <div className='!space-y-4'>
       <div className="flex items-center">
@@ -49,12 +68,13 @@ const Appointments = () => {
         <h2>Appointments</h2>
       </div>
 
+
       <div className="bg-white !p-3">
         <div className="flex justify-between items-center">
-          <div className="flex">
-            <Input placeholder='search by appointment number' />
+          <div className="flex gap-3">
+            <Input placeholder="search by appointment number" />
 
-            <Select placeholder="Select the Option" >
+            <Select placeholder="sort by Status">
               <Option value="Pending">Pending</Option>
               <Option value="Approved">Approved</Option>
               <Option value="Canceled">Canceled</Option>
@@ -63,7 +83,12 @@ const Appointments = () => {
         </div>
       </div>
 
-      <Table className='!my-5' columns={columns} />
+
+      <Table className='!my-5' 
+       columns={columns}
+       dataSource={datasource}
+      pagination = {false} 
+      />
     </div>
 
   );

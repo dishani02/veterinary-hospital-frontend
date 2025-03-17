@@ -2,7 +2,7 @@ import { Button, Form, Input, Select, Upload } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { UploadOutlined } from '@ant-design/icons';
 import { ChevronRight } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 
 const { Option } = Select;
 

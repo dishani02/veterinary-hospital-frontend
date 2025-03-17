@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router";
 import AppLayout from './components/layouts/app-layout';
 import GuestLayout from './components/layouts/guest-layout';
 
@@ -16,6 +16,12 @@ import Pet from "./app/pet/pet";
 import AddPet from "./app/pet/addpet";
 import EditPet from "./app/pet/editpet";
 import UserProfile from "./app/userprofile";
+import ServiceRequests from "./app/services/services";
+import RequestNewService from "./app/services/requestnewservice";
+import ServiceConfirmation from "./app/services/serviceconfirmation";
+
+
+
 
 //admin pages
 import Orders from "./admin/order/orders";
@@ -27,10 +33,14 @@ import Users from "./admin/user/user";
 import Staff from "./admin/staff/staff";
 import AddStaff from "./admin/staff/addstaff";
 import EditStaff from "./admin/staff/editstaff";
+import ViewStaff from "./admin/staff/viewstaff";
 import AdminAppointments from "./admin/appointments/appointments";
 import ViewAppointment from "./admin/appointments/view-appointment";
+import Services from "./admin/services/services";
+import ViewServices from "./admin/services/viewservices";
 import AdminDashboard from "./admin/dashboard";
 import AdminLayout from "./components/layouts/admin-layout";
+
 
 function App() {
   return (
@@ -50,6 +60,7 @@ function App() {
             <Route path="confirm" element={<AppointmentConfirmation />} />
           </Route>
 
+
           <Route path="shop">
             <Route index element={<Shop />} />
             <Route path="cart" element={<Cart />} />
@@ -62,6 +73,14 @@ function App() {
             <Route path="edit" element={<EditPet />} />
             
           </Route>
+
+          <Route path="services">
+          <Route index element={<ServiceRequests />} />
+          <Route path="new" element={<RequestNewService />} />
+          <Route path="confirm" element={<ServiceConfirmation />} />
+
+          </Route>
+
         </Route>
 
         <Route path="admin" element={<AdminLayout />}>
@@ -84,6 +103,7 @@ function App() {
 
           <Route path="staff">
             <Route index element={<Staff />} />
+            <Route path=":staffId" element={<ViewStaff />} />
             <Route  path="add" element={<AddStaff />} />
             <Route  path="edit" element={<EditStaff />} />
           </Route>
@@ -96,6 +116,12 @@ function App() {
             <Route index element={<ViewOrder/>}/>
             <Route path=":orderid" element={<ViewOrder/>}/>
           </Route>
+
+          <Route path="services">
+            <Route index element={<Services/>}/>
+            <Route path=":serviceId" element={<ViewServices/>}/>
+          </Route>
+
 
         </Route>
       </Routes>

@@ -1,7 +1,7 @@
 import { Button, Form, Input, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { ChevronRight } from 'lucide-react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 
 const EditPet = () => {

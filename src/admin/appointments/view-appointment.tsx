@@ -12,9 +12,9 @@ const Appointments = () => {
       dataIndex: "appointmentId"
     },
     {
-      key: "petowner",
-      title: "Pet Owner",
-      dataIndex: "petowner"
+      key: "petName",
+      title: "Pet Name",
+      dataIndex: "petName"
     },
     {
       key: "veterinarian",
@@ -29,13 +29,26 @@ const Appointments = () => {
     {
       key: "time",
       title: "Time",
-      dataIndex: "time"
+      dataIndex: "time",
     },
     {
       key: "status",
       title: "Status",
-      dataIndex: "status"
+      dataIndex: "status",
+     
     }
+  ]
+
+  const datasource: any =[
+    {
+      appointmentId : "001",
+      petName : "SAM",
+      veterinarian : "Dr. Roshan Perera",
+      date : "20.04.2025",
+      time : "04:00",
+      status : "Completed"
+
+    },
   ]
   return (
     <div className='!space-y-4'>
@@ -48,15 +61,17 @@ const Appointments = () => {
       <div className="bg-white !p-3">
         <div className="flex justify-between items-center">
           <div className="flex">
-           <h2>Appointment Payment History</h2>
+           <h2 className= "text-lg font-medium">Appointment Payment Records</h2>
           </div>
         </div>
 
         <Table
           className='!my-5'
           columns={columns}
+          dataSource={datasource}
+          pagination = {false}
+          />
           
-        />
       </div>
     </div>
   )

@@ -4,9 +4,9 @@ import { Link, useNavigate } from 'react-router';
 
 const { Option } = Select;
 
-const Staff = () => {
+const ViewStaff = () => {
   const navigate = useNavigate();
-  
+
   const columns = [
     {
       key: "staffId",
@@ -68,7 +68,7 @@ const Staff = () => {
           <Input placeholder='Search by staff ID or name' className="w-1/3" />
 
           <Select placeholder="Select Role" className="w-1/4">
-            <Option value="Veterinarien">Veterinariens</Option>
+            <Option value="Veterinarian">Veterinarians</Option>
             <Option value="Lab Staff">Lab Staff</Option>
             <Option value="Clinic Staff">Clinic Staff</Option>
           </Select>
@@ -84,4 +84,4 @@ const Staff = () => {
   );
 };
 
-export default Staff;
+export default ViewStaff;
