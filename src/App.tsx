@@ -82,7 +82,6 @@ function App() {
             <Route index element={<Users />} />
           </Route>
 
-<<<<<<< HEAD
           <Route path="staff">
             <Route index element={<Staff />} />
             <Route  path="add" element={<AddStaff />} />
@@ -93,13 +92,11 @@ function App() {
             <Route index element={<AdminAppointments />} />
             <Route path=":appointmentId" element={<ViewAppointment />} />
           </Route>
-=======
           <Route path="order">
             <Route index element={<ViewOrder/>}/>
             <Route path=":orderid" element={<ViewOrder/>}/>
           </Route>
 
->>>>>>> 0629bfaa161c440d7d51add3aa1c255af69be9b2
         </Route>
       </Routes>
     </BrowserRouter>
