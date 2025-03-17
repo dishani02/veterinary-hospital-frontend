@@ -44,10 +44,8 @@ const Orders = () => {
       title: "View",
       dataIndex: "action",
       render:()=>{
-        return  <Button type="text" htmlType='button'  onClick={() => navigate("/admin/order/view-orderk")} >  <ListOrdered /></Button>
-    //  <Button type="primary" htmlType='button' onClick={() => navigate("/app/appointments/book")}>
-    //         Request Appointment
-    //       </Button>
+        return  <Button type="text" htmlType='button'  onClick={() => navigate("/admin/order/view-order")} >  <ListOrdered /></Button>
+   
       }
     },
   ];
@@ -103,18 +101,21 @@ const Orders = () => {
       <h2 className='text-xl font-medium !p-3'>Product Management</h2>
 
       <div className="flex justify-right  gap-6 !p-3">
-        <div
-          className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl 
-          font-bold rounded-2xl shadow-lg cursor-pointer hover:bg-gray-200 transition-all border border-gray-300"
-        >
-          Products
-        </div>
-        <div
-          className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl 
-          font-bold rounded-2xl shadow-lg cursor-pointer hover:bg-gray-200 transition-all border border-gray-300"
-        >
-          Category
-        </div>
+        
+      <div
+        className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl 
+        font-bold rounded-2xl shadow-lg cursor-pointer hover:bg-gray-200 transition-all border border-gray-300"
+        onClick={() => navigate("/admin/products")}
+      >
+        Products
+      </div>
+      <div
+        className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl 
+        font-bold rounded-2xl shadow-lg cursor-pointer hover:bg-gray-200 transition-all border border-gray-300"
+        onClick={() => navigate("/admin/category")}
+      >
+        Category
+      </div>
       </div>
 
       <h2 className="text-xl font-medium whitespace-nowrap !p-2 ">Order Management</h2>
