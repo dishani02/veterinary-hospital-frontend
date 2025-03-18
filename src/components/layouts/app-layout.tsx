@@ -3,6 +3,8 @@ import { Link, Outlet } from 'react-router'
 import { Avatar, Badge, Layout, Menu } from 'antd';
 import { Ambulance, CircleDollarSign, Dog, LayoutDashboard, ShoppingBag, ShoppingCart, Stethoscope, UserRound, UserRoundCog } from 'lucide-react';
 import { useAppContext } from '../../providers/context-provider';
+import logo from "../../assets/img/logo.png"; 
+
 
 const AppLayout = () => {
 
@@ -18,8 +20,10 @@ const AppLayout = () => {
         className='!bg-black h-screen'
       >
         <div className="flex !p-3 m-auto">
-          <h2 className='text-lg text-white text-center'>Pet Paw</h2>
-        </div>
+          {/* <h2 className='text-lg text-white text-center'>Pet Paw</h2> */}
+          <img src={logo} alt="Logo" />
+
+          </div>
         <Menu
           mode='inline'
           theme="dark"

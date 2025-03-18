@@ -75,10 +75,6 @@ const Viewproduct = () => {
                                     <TextArea defaultValue="Pup-friendly formula with a powerful antioxidant blend for lifelong health." />
                                 </Form.Item>
                             </div>
-
-                            <Form.Item label="Date" name="date">
-                                <Input defaultValue="2025-03-17" />
-                            </Form.Item>
                         </div>
 
                     </Form>

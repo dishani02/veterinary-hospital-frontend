@@ -106,6 +106,8 @@ function App() {
             <Route path="view" element={<Products />} />
             <Route path="create" element={<CreateProduct />} />
             <Route path="edit/:productId" element={<EditProduct />} />
+            <Route path="view/:productId" element={<Viewproduct />} />
+
           </Route>
 
 

@@ -59,7 +59,7 @@ const CategoryPage: React.FC = () => {
         <Button type="primary" icon={<Plus size={16} />} onClick={showModal}>
           Add New Category
         </Button>
-        <Button type="dashed" icon={<ArrowLeft size={16} />} onClick={() => navigate("/admin/orders") }>
+        <Button type="primary" icon={<ArrowLeft size={16} />} onClick={() => navigate("/admin/orders") }>
           Go Back to Orders
         </Button>
       </div>

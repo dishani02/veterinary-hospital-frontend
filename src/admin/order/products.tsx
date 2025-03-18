@@ -1,7 +1,7 @@
 import { Button, Input, Select, Space, Table } from 'antd';
 import { ChevronRight, Eye, ListOrdered, Pencil, Trash2 } from 'lucide-react';
 import React from 'react'
-import { useNavigate , Link} from 'react-router';
+import { useNavigate, Link } from 'react-router';
 
 const Products = () => {
   const navigate = useNavigate();
@@ -60,68 +60,84 @@ const Products = () => {
       render: () => {
         return (
           <Space>
-            <Button type="text" htmlType="button" onClick={() => navigate("/admin/products/view/new")}>
+            <Button
+              type="text"
+              htmlType="button"
+              size="small"
+              onClick={() => navigate(`/admin/products/view/new`)}
+            >
               <Eye />
             </Button>
-            <Button type="text" htmlType="button" onClick={() => navigate("/admin/products/edit/new")}>
+
+            <Button
+              type="text"
+              htmlType="button"
+              size="small"
+              onClick={() => navigate("/admin/products/edit/new")}>
               <Pencil />
             </Button>
-            <Button type="text" htmlType="button" danger onClick={() => console.log("Delete action triggered")}>
+
+            <Button
+              type="text"
+              htmlType="button"
+              danger size="small"
+              onClick={() => console.log("Delete action triggered")}>
               <Trash2 />
             </Button>
+
           </Space>
         );
-    },
-  } 
+      },
+    }
 
   ];
-  
+
   const dataSource: any = [
     {
-      Product:"Cat Food",
-      productId:"OR-1078",
-      category:"Cat",
-      price:"Rs.900.00",
-      volume:"KG",
-      stock:"25"
-  
+      Product: "Cat Food",
+      productId: "OR-1078",
+      category: "Cat",
+      price: "Rs.900.00",
+      volume: "KG",
+      stock: "25"
+
     },
     {
-      Product:"Cat Food",
-      productId:"OR-1078",
-      category:"Cat",
-      price:"Rs.900.00",
-      volume:"KG",
-      stock:"25"
+      Product: "Cat Food",
+      productId: "OR-1078",
+      category: "Cat",
+      price: "Rs.900.00",
+      volume: "KG",
+      stock: "25"
     },
     {
-      Product:"Cat Food",
-      productId:"OR-1078",
-      category:"Cat",
-      price:"Rs.900.00",
-      volume:"KG",
-      stock:"25"
+      Product: "Cat Food",
+      productId: "OR-1078",
+      category: "Cat",
+      price: "Rs.900.00",
+      volume: "KG",
+      stock: "25"
     },
     {
-      Product:"Cat Food",
-      productId:"OR-1078",
-      category:"Cat",
-      price:"Rs.900.00",
-      volume:"KG",
-      stock:"25"
+      Product: "Cat Food",
+      productId: "OR-1078",
+      category: "Cat",
+      price: "Rs.900.00",
+      volume: "KG",
+      stock: "25"
     },
   ]
 
 
   return (
     <div className='!space-y-4'>
-    <div className="flex items-center">
-      <Link to="/app/dashboard" className='!text-black'>Home</Link>
-      <ChevronRight size={16} />
-      <Link to="/admin/orders" className='!text-black'>Orders</Link>
-      <ChevronRight size={16} />
-      <h2>Products</h2>
-    </div>
+      <div className="flex items-center">
+        <Link to="/app/dashboard" className='!text-black'>Home</Link>
+        <ChevronRight size={16} />
+        <Link to="/admin/orders" className='!text-black'>Orders</Link>
+        <ChevronRight size={16} />
+        <h2>Products</h2>
+      </div>
 
       <h2 className='text-xl font-medium !p-3'>Product Management</h2>
 
@@ -132,20 +148,20 @@ const Products = () => {
             placeholder="Search product by SKU"
             className="border p-2 rounded-md w-64"
           />
-           <Select className="border p-2 rounded-md w-40">
+          <Select className="border p-2 rounded-md w-40">
             <option value="Cat">Cat</option>
             <option value="Dod">Dod</option>
             <option value="Accessories">Accessories</option>
           </Select>
-           <Button type="primary" htmlType='button' onClick={() => navigate("/admin/products/create")}>
+          <Button type="primary" htmlType='button' onClick={() => navigate("/admin/products/create")}>
             Create new product
           </Button>
         </div>
       </div>
 
-      <Table className='!my-5' 
-      columns={columns}
-      dataSource={dataSource} />
+      <Table className='!my-5'
+        columns={columns}
+        dataSource={dataSource} />
     </div>
   )
 }
