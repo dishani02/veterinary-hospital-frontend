@@ -18,6 +18,8 @@ import UserProfile from "./app/userprofile";
 import ServiceRequests from "./app/services/services";
 import RequestNewService from "./app/services/requestnewservice";
 import ServiceConfirmation from "./app/services/serviceconfirmation";
+import OrdersHistory from "./app/orderhistory/order-history";
+import OrderView from "./app/orderhistory/order-view";
 
 
 
@@ -69,21 +71,25 @@ function App() {
             <Route path=":productId" element={<ProductView />} />
           </Route>
 
+          <Route path="orderhistory">
+            <Route index element={<OrdersHistory />} />
+            <Route path=":orderId" element={<OrderView />} />
+          </Route>
+
+
           <Route path="pet">
             <Route index element={<Pet />} />
             <Route path="add" element={<AddPet />} />
             <Route path="edit" element={<EditPet />} />
-
           </Route>
 
           <Route path="services">
             <Route index element={<ServiceRequests />} />
             <Route path="new" element={<RequestNewService />} />
             <Route path="confirm" element={<ServiceConfirmation />} />
-
           </Route>
 
-          
+
 
         </Route>
 
@@ -101,8 +107,8 @@ function App() {
             <Route path="create" element={<CreateProduct />} />
             <Route path="edit/:productId" element={<EditProduct />} />
           </Route>
-          
-          
+
+
           <Route path="category">
             <Route index element={<Category />} />
             <Route path="view" element={<Category />} />
@@ -123,7 +129,7 @@ function App() {
             <Route index element={<AdminAppointments />} />
             <Route path=":appointmentId" element={<ViewAppointment />} />
             <Route path="reschedule-appointments" element={<RescheduleAppointment />} />
-            </Route>
+          </Route>
 
           <Route path="order">
             <Route index element={<ViewOrder />} />
