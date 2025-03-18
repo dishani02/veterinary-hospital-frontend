@@ -8,7 +8,7 @@ const { Option } = Select;
 const Appointments = () => {
   const navigate = useNavigate();
 
-  const columns = [
+  const columns:any = [
     {
       key: "appointmentId",
       title: "Appointment Id",
@@ -41,11 +41,12 @@ const Appointments = () => {
     },
     {
       key: "Action",
-      title: "Action",
+      title: "Action(s)",
       dataIndex: "Action",
+      align: "center",
       render: () => {
         return (
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className='flex justify-center'>
             <Button
               type="text"
               htmlType="button"
@@ -80,7 +81,7 @@ const Appointments = () => {
   return (
     <div className='!space-y-4'>
       <div className="flex items-center">
-        <Link to="/app/dashboard" className='!text-black'>Home</Link>
+        <Link to="/admin/dashboard" className='!text-black'>Home</Link>
         <ChevronRight size={16} />
         <h2>Appointments</h2>
       </div>
