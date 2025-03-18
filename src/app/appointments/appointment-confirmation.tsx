@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 const AppointmentConfirmation: FC = () => {
   return (
-    <div className='space-y-2 p-2'>
+    <div className='space-y-10 p-2'>
       <div className='flex items-center'>
         <Link to='/app/dashboard' className='!text-black'>Home</Link>
         <ChevronRight size={16} />
@@ -13,7 +13,7 @@ const AppointmentConfirmation: FC = () => {
         <h2>Confirmation</h2>
       </div>
 
-      <div className='bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl'>
+      <div className='bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl'>
         <h3 className='text-xl font-semibold text-gray-900 mb-4'>Appointment Summary</h3>
         <div className='space-y-3'>
           <div className='text-gray-700'>
@@ -26,11 +26,15 @@ const AppointmentConfirmation: FC = () => {
             <span className='font-medium'>Species & Breed: </span>Cat
           </div>
           <div className='text-gray-700'>
-            <span className='font-medium'>Appointment Date & Time: </span>20.03.2025
+            <span className='font-medium'>Veternarian: </span>Dr. Roshan Perera
           </div>
           <div className='text-gray-700'>
-            <span className='font-medium'>Doctor's Name: </span>Dr. Roshan Perera
+            <span className='font-medium'>Appointment Date : </span>20.03.2025
           </div>
+          <div className='text-gray-700'>
+            <span className='font-medium'> Time: </span>04.00
+          </div>
+       
           <div className='text-gray-700'>
             <span className='font-medium'>Reason for Appointment: </span>Vaccination
           </div>

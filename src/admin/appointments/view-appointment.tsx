@@ -8,18 +8,19 @@ const ViewAppointment = () => {
   return (
     <div className='!space-y-4'>
       <div className="flex items-center">
-        <Link to="/app/dashboard" className='!text-black'>Home</Link>
+        <Link to="/admin/dashboard" className='!text-black'>Home</Link>
         <ChevronRight size={16} />
-        <h2>Appointments</h2>
+        <Link to="/admin/Appointments" className='!text-black'>Appointments</Link>
         <ChevronRight size={16} />
         <h2>View Appointments</h2>
       </div>
 
       <div className="max-w-3xl mx-auto p-10 bg-white shadow-lg rounded-lg">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">Appointment Details</h2>
-        <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-2 gap-10">
+      <h2 className="text-lg font-semibold text-gray-800 mb-4">Appointment Details</h2>
+        <div className="grid grid-cols-2 gap-10">
 
-
+        </div>
           <div>
             <h3 className="font-semibold text-gray-700 text-sm">Appointment ID</h3>
             <p className="text-gray-900 text-base">001</p>
@@ -61,6 +62,7 @@ const ViewAppointment = () => {
         </div>
       </div>
     </div>
+   
   );
 };
 
