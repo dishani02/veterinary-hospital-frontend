@@ -46,12 +46,27 @@ const AppLayout = () => {
               icon: <Dog size={size} />,
               label: <Link to="/app/pet">Pet profile</Link>
             },
-
+            // {
+            //   key: 4,
+            //   icon: <ShoppingBag size={size} />,
+            //   label: <Link to="/app/shop">Shop</Link>
+            // },
             {
               key: 4,
               icon: <ShoppingBag size={size} />,
-              label: <Link to="/app/shop">Shop</Link>
+              label: "Shop",
+              children: [
+                {
+                  key: "shop",
+                  label: <Link to="/app/shop">Shop</Link>,
+                },
+                {
+                  key: "orders",
+                  label: <Link to="/app/orderhistory">Orders</Link>,
+                },
+              ],
             },
+            
             {
               key: 5,
               icon: <CircleDollarSign size={size} />,
