@@ -80,7 +80,7 @@ const CreateProduct = () => {
 
           <Form.Item
             name="price"
-            label="price"
+            label="Price"
             rules={[
               {
                 required: true, message: 'Price is required'
@@ -135,24 +135,8 @@ const CreateProduct = () => {
             >
               <TextArea placeholder='Additional details' />
             </Form.Item>
-
-
           </div>
-          <Form.Item
-            label="Date"
-            name="date"
-            rules={[
-              {
-                required: true,
-                message: "Date is required"
-              }
-            ]}
-          >
-            <DatePicker
-              className='w-full'
-            // disabledDate={(current) => current && current < moment().endOf('day')} 
-            />
-          </Form.Item>
+
           <div className="col-span-2">
             <Form.Item name="image" label="Pet Image">
               <Upload beforeUpload={() => false} listType="picture">
@@ -168,7 +152,7 @@ const CreateProduct = () => {
 
         </div>
       </Form>
-      
+
     </div>
   )
 }
