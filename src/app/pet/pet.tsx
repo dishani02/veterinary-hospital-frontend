@@ -51,6 +51,16 @@ const Pet = () => {
       )
     },
     {
+      key: "medicalHistory",
+      title: "Medical History",
+      dataIndex: "medicalHistory",
+      render: (_: any, record: any) => (
+        <Button type="link" onClick={() => navigate(`/app/pet/${record.petId}/medical-history`)}>
+          View History
+        </Button>
+      )
+    },
+    {
       key: "action",
       title: "Action",
       dataIndex: "action"
