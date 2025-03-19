@@ -69,10 +69,10 @@ function App() {
           </Route>
 
           <Route path="pet">
-             <Route index element={<Pet />} />
-             <Route path="add" element={<AddPet />} />
-              <Route path="edit" element={<EditPet />} />
-               <Route path="medical-history" element={<MedicalHistory />} />
+            <Route index element={<Pet />} />
+            <Route path="add" element={<AddPet />} />
+            <Route path="edit" element={<EditPet />} />
+            <Route path="medical-history" element={<MedicalHistory />} />
           </Route>
           <Route path="services">
           <Route index element={<ServiceRequests />} />
