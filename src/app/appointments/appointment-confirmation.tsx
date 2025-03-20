@@ -23,18 +23,14 @@ const AppointmentConfirmation: FC = () => {
             <span className='font-medium'>Pet Name: </span>Sam
           </div>
           <div className='text-gray-700'>
-            <span className='font-medium'>Species & Breed: </span>Cat
-          </div>
-          <div className='text-gray-700'>
             <span className='font-medium'>Veternarian: </span>Dr. Roshan Perera
           </div>
           <div className='text-gray-700'>
-            <span className='font-medium'>Appointment Date : </span>20.03.2025
+            <span className='font-medium'> Date : </span>20.03.2025
           </div>
           <div className='text-gray-700'>
             <span className='font-medium'> Time: </span>04.00
           </div>
-       
           <div className='text-gray-700'>
             <span className='font-medium'>Reason for Appointment: </span>Vaccination
           </div>
