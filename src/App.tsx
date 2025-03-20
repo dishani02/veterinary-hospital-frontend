@@ -14,6 +14,7 @@ import ProductView from "./app/shop/product-view";
 import Pet from "./app/pet/pet";
 import AddPet from "./app/pet/addpet";
 import EditPet from "./app/pet/editpet";
+import MedicalHistory from "./app/pet/medicalhistory";
 import UserProfile from "./app/userprofile";
 import ServiceRequests from "./app/services/services";
 import RequestNewService from "./app/services/requestnewservice";
@@ -81,8 +82,11 @@ function App() {
             <Route index element={<Pet />} />
             <Route path="add" element={<AddPet />} />
             <Route path="edit" element={<EditPet />} />
+<<<<<<< HEAD
+            <Route path="medical-history" element={<MedicalHistory />} />
+=======
+>>>>>>> 52b5a176408be6b8ab8334787591fb00b55da118
           </Route>
-
           <Route path="services">
             <Route index element={<ServiceRequests />} />
             <Route path="new" element={<RequestNewService />} />
