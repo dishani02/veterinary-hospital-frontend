@@ -1,7 +1,7 @@
 
 import { Link, Outlet } from 'react-router'
 import { Avatar, Layout, Menu } from 'antd';
-import { Ambulance, ContactRound, FileText, LayoutDashboard, ShoppingBag, Stethoscope, UserRound, Users } from 'lucide-react';
+import { Ambulance, Coins, ContactRound, FileText, LayoutDashboard, ShoppingBag, Stethoscope, UserRound, Users } from 'lucide-react';
 
 const AdminLayout = () => {
 
@@ -58,6 +58,12 @@ const AdminLayout = () => {
               icon:    <FileText size={size}/>,
               label: <Link to="/admin/dashboard">Reports</Link>
             },
+            {//card in the dashboard for financial management tab
+              key: 7,
+              icon: < Coins size={size} />,
+              label: <Link to="/admin/financial">Financial</Link>
+            },
+  
           ]} />
       </Sider>
       <Layout>

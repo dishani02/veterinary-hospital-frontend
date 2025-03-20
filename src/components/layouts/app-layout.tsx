@@ -1,7 +1,7 @@
 
 import { Link, Outlet } from 'react-router'
 import { Avatar, Badge, Layout, Menu } from 'antd';
-import { Ambulance, CircleDollarSign, Dog, LayoutDashboard, ShoppingBag, ShoppingCart, Stethoscope, UserRound, UserRoundCog } from 'lucide-react';
+import { Ambulance, CircleDollarSign, Dog, LayoutDashboard, ShoppingBag, ShoppingCart, Stethoscope, UserRound, UserRoundCog, Coins } from 'lucide-react';
 
 const AppLayout = () => {
 
@@ -58,7 +58,7 @@ const AppLayout = () => {
               key: 6,
               icon:  <UserRoundCog size={size} />,
               label: <Link to="/app/user">Profile Setting</Link>
-            },
+            }
 
           ]} />
       </Sider>

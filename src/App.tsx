@@ -42,6 +42,10 @@ import AdminDashboard from "./admin/dashboard";
 import AdminLayout from "./components/layouts/admin-layout";
 import Viewproduct from "./admin/order/view-product";
 import Category from "./admin/order/category";
+import AllExpenses from "./admin/financial/expenses";
+import AddExpense from "./admin/financial/addexpense";
+
+
 
 
 function App() {
@@ -131,6 +135,11 @@ function App() {
           <Route path="services">
             <Route index element={<Services />} />
             <Route path=":serviceId" element={<ViewServices />} />
+          </Route>
+
+          <Route path="financial">
+            <Route index element={<AllExpenses />} />
+            <Route path=":addexpense" element={<AddExpense />} />
           </Route>
 
 
