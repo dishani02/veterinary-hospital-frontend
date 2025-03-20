@@ -2,11 +2,16 @@
 import { Link, Outlet } from 'react-router'
 import { Avatar, Badge, Layout, Menu } from 'antd';
 import { Ambulance, CircleDollarSign, Dog, LayoutDashboard, ShoppingBag, ShoppingCart, Stethoscope, UserRound, UserRoundCog } from 'lucide-react';
+import { useAppContext } from '../../providers/context-provider';
+import logo from "../../assets/img/logo.png"; 
+
 
 const AppLayout = () => {
 
   const { Header, Content, Footer, Sider } = Layout;
   const size = 18;
+
+  const { cart } = useAppContext();
 
   return (
     <Layout>
@@ -15,8 +20,10 @@ const AppLayout = () => {
         className='!bg-black h-screen'
       >
         <div className="flex !p-3 m-auto">
-          <h2 className='text-lg text-white text-center'>Pet Paw</h2>
-        </div>
+          {/* <h2 className='text-lg text-white text-center'>Pet Paw</h2> */}
+          <img src={logo} alt="Logo" />
+
+          </div>
         <Menu
           mode='inline'
           theme="dark"
@@ -35,20 +42,35 @@ const AppLayout = () => {
             },
             {
               key: 2,
-              icon: <Ambulance size={size} />, 
+              icon: <Ambulance size={size} />,
               label: <Link to="/app/services">Service Requests</Link>
             },
             {
               key: 3,
-              icon: <Dog size={size}/>, 
+              icon: <Dog size={size} />,
               label: <Link to="/app/pet">Pet profile</Link>
             },
-
+            // {
+            //   key: 4,
+            //   icon: <ShoppingBag size={size} />,
+            //   label: <Link to="/app/shop">Shop</Link>
+            // },
             {
               key: 4,
               icon: <ShoppingBag size={size} />,
-              label: <Link to="/app/shop">Shop</Link>
+              label: "Shop",
+              children: [
+                {
+                  key: "shop",
+                  label: <Link to="/app/shop">Shop</Link>,
+                },
+                {
+                  key: "orders",
+                  label: <Link to="/app/orderhistory">Orders</Link>,
+                },
+              ],
             },
+            
             {
               key: 5,
               icon: <CircleDollarSign size={size} />,
@@ -56,7 +78,7 @@ const AppLayout = () => {
             },
             {
               key: 6,
-              icon:  <UserRoundCog size={size} />,
+              icon: <UserRoundCog size={size} />,
               label: <Link to="/app/user">Profile Setting</Link>
             },
 
@@ -65,7 +87,7 @@ const AppLayout = () => {
       <Layout>
         <Header className="!bg-white flex justify-end items-center gap-x-4">
           <Link to={'/app/shop/cart'} className='flex item-center'>
-            <Badge count={5} className='flex item-center'>
+            <Badge count={cart?.products.length || 0} className='flex item-center'>
               <ShoppingCart size={22} className='cursor-pointer text-black' />
             </Badge>
           </Link>

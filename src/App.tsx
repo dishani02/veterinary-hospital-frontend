@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import AppLayout from './components/layouts/app-layout';
 import GuestLayout from './components/layouts/guest-layout';
-
 import Login from "./auth/login";
 
 //customer pages
@@ -20,6 +19,8 @@ import UserProfile from "./app/userprofile";
 import ServiceRequests from "./app/services/services";
 import RequestNewService from "./app/services/requestnewservice";
 import ServiceConfirmation from "./app/services/serviceconfirmation";
+import OrdersHistory from "./app/orderhistory/order-history";
+import OrderView from "./app/orderhistory/order-view";
 
 
 
@@ -37,10 +38,13 @@ import EditStaff from "./admin/staff/editstaff";
 import ViewStaff from "./admin/staff/viewstaff";
 import AdminAppointments from "./admin/appointments/appointments";
 import ViewAppointment from "./admin/appointments/view-appointment";
+import RescheduleAppointment from "./admin/appointments/reschedule-appointments";
 import Services from "./admin/services/services";
 import ViewServices from "./admin/services/viewservices";
 import AdminDashboard from "./admin/dashboard";
 import AdminLayout from "./components/layouts/admin-layout";
+import Viewproduct from "./admin/order/view-product";
+import Category from "./admin/order/category";
 
 
 function App() {
@@ -52,7 +56,7 @@ function App() {
         </Route>
 
         <Route path="app" element={<AppLayout />}>
-          <Route path="user" element={<UserProfile/>}></Route>
+          <Route path="user" element={<UserProfile />}></Route>
           <Route path="dashboard" element={<Dashboard />} />
 
           <Route path="appointments">
@@ -68,18 +72,28 @@ function App() {
             <Route path=":productId" element={<ProductView />} />
           </Route>
 
+          <Route path="orderhistory">
+            <Route index element={<OrdersHistory />} />
+            <Route path=":orderId" element={<OrderView />} />
+          </Route>
+
+
           <Route path="pet">
             <Route index element={<Pet />} />
             <Route path="add" element={<AddPet />} />
             <Route path="edit" element={<EditPet />} />
+<<<<<<< HEAD
             <Route path="medical-history" element={<MedicalHistory />} />
+=======
+>>>>>>> 52b5a176408be6b8ab8334787591fb00b55da118
           </Route>
           <Route path="services">
-          <Route index element={<ServiceRequests />} />
-          <Route path="new" element={<RequestNewService />} />
-          <Route path="confirm" element={<ServiceConfirmation />} />
-
+            <Route index element={<ServiceRequests />} />
+            <Route path="new" element={<RequestNewService />} />
+            <Route path="confirm" element={<ServiceConfirmation />} />
           </Route>
+
+
 
         </Route>
 
@@ -93,10 +107,19 @@ function App() {
 
           <Route path="products">
             <Route index element={<Products />} />
+            <Route path="view" element={<Products />} />
             <Route path="create" element={<CreateProduct />} />
-            <Route path=":productId" element={<EditProduct />} />
+            <Route path="edit/:productId" element={<EditProduct />} />
+            <Route path="view/:productId" element={<Viewproduct />} />
+
           </Route>
-          
+
+
+          <Route path="category">
+            <Route index element={<Category />} />
+            <Route path="view" element={<Category />} />
+          </Route>
+
           <Route path="user-pet">
             <Route index element={<Users />} />
           </Route>
@@ -104,24 +127,25 @@ function App() {
           <Route path="staff">
             <Route index element={<Staff />} />
             <Route path=":staffId" element={<ViewStaff />} />
-            <Route  path="add" element={<AddStaff />} />
-            <Route  path="edit" element={<EditStaff />} />
+            <Route path="add" element={<AddStaff />} />
+            <Route path="edit" element={<EditStaff />} />
           </Route>
 
           <Route path="appointments">
             <Route index element={<AdminAppointments />} />
             <Route path=":appointmentId" element={<ViewAppointment />} />
+            <Route path="reschedule-appointments" element={<RescheduleAppointment />} />
           </Route>
+
           <Route path="order">
-            <Route index element={<ViewOrder/>}/>
-            <Route path=":orderid" element={<ViewOrder/>}/>
+            <Route index element={<ViewOrder />} />
+            <Route path=":orderid" element={<ViewOrder />} />
           </Route>
 
           <Route path="services">
-            <Route index element={<Services/>}/>
-            <Route path=":serviceId" element={<ViewServices/>}/>
+            <Route index element={<Services />} />
+            <Route path=":serviceId" element={<ViewServices />} />
           </Route>
-
 
         </Route>
       </Routes>

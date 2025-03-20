@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router';
 
 const { Option } = Select;
 
-const Orders = () => {
+const OrdersHistory = () => {
   const navigate = useNavigate();
 
   const columns = [
@@ -18,11 +18,6 @@ const Orders = () => {
       key: "date",
       title: "Date",
       dataIndex: "date"
-    },
-    {
-      key: "customer",
-      title: "Customer",
-      dataIndex: "customer"
     },
     {
       key: "items",
@@ -43,11 +38,15 @@ const Orders = () => {
       key: "action",
       title: "View",
       dataIndex: "action",
-      render:()=>{
-        return  <Button type="text" htmlType='button'  onClick={() => navigate("/admin/order/view-order")} >  <ListOrdered /></Button>
-   
+      render: () => {
+        return (
+          <Button type="text" htmlType='button' onClick={() => navigate("/app/orderhistory/order-view")}>
+            <ListOrdered />
+          </Button>
+        );
       }
-    },
+    }
+    
   ];
 
   const dataSource: any = [
@@ -89,42 +88,19 @@ const Orders = () => {
     },
   ]
 
-
   return (
     <div className='!space-y-4'>
       <div className="flex items-center">
         <Link to="/app/dashboard" className='!text-black'>Home</Link>
         <ChevronRight size={16} />
-        <h2>Orders</h2>
+        <h2>Order History</h2>
       </div>
-
-      <h2 className='text-xl font-medium !p-3'>Product Management</h2>
-
-      <div className="flex justify-right  gap-6 !p-3">
-        
-      <div
-        className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl 
-        font-bold rounded-2xl shadow-lg cursor-pointer hover:bg-gray-200 transition-all border border-gray-300"
-        onClick={() => navigate("/admin/products")}
-      >
-        Products
-      </div>
-      <div
-        className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl 
-        font-bold rounded-2xl shadow-lg cursor-pointer hover:bg-gray-200 transition-all border border-gray-300"
-        onClick={() => navigate("/admin/category")}
-      >
-        Category
-      </div>
-      </div>
-
-      <h2 className="text-xl font-medium whitespace-nowrap !p-2 ">Order Management</h2>
 
       <div className="flex justify-between items-center ">
         <h2 className="text-lg whitespace-nowrap gap-5">Order List</h2>
         <div className="flex gap-4">
           <Input
-            placeholder="Search by appointment number"
+            placeholder="Search by Order ID"
             className="border p-2 rounded-md w-64"
           />
           <Select className="border p-2 rounded-md w-40">
@@ -143,4 +119,4 @@ const Orders = () => {
   );
 }
 
-export default Orders;
+export default OrdersHistory;

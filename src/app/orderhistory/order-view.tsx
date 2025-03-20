@@ -71,7 +71,7 @@ const dataSource: any = [
 
 const { Option } = Select;
 
-const ViewOrder = () => {
+const OrderView = () => {
   const navigate = useNavigate();
 
   return (
@@ -146,16 +146,7 @@ const ViewOrder = () => {
       <h3 className="font-semibold text-gray-700 text-sm">Total Price</h3>
       <p className="text-gray-900 text-base">Rs. 9500.00</p>
     </div>
-    <div>
-      <h3 className="font-semibold text-gray-700 text-sm">Order Status</h3>
-      <select
-        className="mt-1 p-2 w-full border rounded-md bg-white shadow-sm focus:outline-none focus:ring-2"
-        defaultValue="In Progress">
-        <option value="In Progress">In Progress</option>
-        <option value="Complete">Complete</option>
-        <option value="Cancel">Cancel</option>
-      </select>
-    </div>
+
   </div>
 </div>
 
@@ -181,4 +172,4 @@ const ViewOrder = () => {
   );
 }
 
-export default ViewOrder;
+export default OrderView;
