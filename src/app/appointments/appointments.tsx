@@ -1,6 +1,7 @@
 import { Button, Input, Table } from 'antd';
 import { ChevronRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
+import { DeleteOutlined } from '@ant-design/icons';
 
 const Appointments = () => {
   const navigate = useNavigate();
@@ -38,16 +39,23 @@ const Appointments = () => {
     },
     {
       key: "action",
-      title: "Action",
+      title: "Action(s)",
       render: (_: any, record: { appointmentId: any; }) => (
-        <Button 
-          type="primary" 
-          htmlType="button" 
-          className="w-24 px-6 py-2 text-lg" 
-          onClick={() => handleCancel(record.appointmentId)}
-        >
-          Cancel
-        </Button>
+        <div className="flex gap-8 w-full">
+          <Button
+            type="primary"
+            htmlType="button"
+            className="w-24 px-6 py-2 text-lg"
+            onClick={() => handleCancel(record.appointmentId)}
+          >
+            Cancel
+          </Button>
+          <DeleteOutlined
+            style={{ fontSize: 18, color: 'red', cursor: 'pointer' }}
+            onClick={() => handleDelete(record.appointmentId)}
+          />
+        </div>
+
       )
     }
   ];
@@ -55,12 +63,12 @@ const Appointments = () => {
   const data = [
     {
       key: '1',
-      appointmentId: '001',
+      appointmentId: 'A001',
       petName: 'SAM',
-      veterinarian: 'Dr. Amali Dias',
+      veterinarian: 'Dr. Amali Senanyaka',
       date: '2025-03-20',
       time: '04.00',
-      status: 'Confirmed'
+      status: 'Pending'
     },
     {
       key: '2',
@@ -105,8 +113,12 @@ const Appointments = () => {
 
 export default Appointments;
 
-
 function handleCancel(appointmentId: any): void {
   throw new Error('Function not implemented.');
 }
 
+// Function to handle the delete action
+function handleDelete(appointmentId: any): void {
+  console.log(`Deleting appointment with ID: ${appointmentId}`);
+  // Add the delete logic here, like removing the appointment from the state or calling an API.
+}

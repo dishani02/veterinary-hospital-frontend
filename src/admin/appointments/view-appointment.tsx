@@ -16,11 +16,11 @@ const ViewAppointment = () => {
       </div>
 
       <div className="max-w-3xl mx-auto p-10 bg-white shadow-lg rounded-lg">
-      <div className="grid grid-cols-2 gap-10">
-      <h2 className="text-lg font-semibold text-gray-800 mb-4">Appointment Details</h2>
         <div className="grid grid-cols-2 gap-10">
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">Appointment Details</h2>
+          <div className="grid grid-cols-2 gap-10">
 
-        </div>
+          </div>
           <div>
             <h3 className="font-semibold text-gray-700 text-sm">Appointment ID</h3>
             <p className="text-gray-900 text-base">001</p>
@@ -55,14 +55,15 @@ const ViewAppointment = () => {
         </div>
 
         <div className="flex justify-end gap-2 mt-10">
-          <Button type="primary" className='w-24' onClick={() => navigate(-1)}>Back</Button>
+          {/* <Button type="primary" className='w-24' onClick={() => navigate(-1)}>Back</Button> */}
+
+          <Button type="primary" htmlType="submit" className="w-24 px-6 py-2 text-lg">Cancle</Button>
           <Button type="primary" htmlType='button' onClick={() => navigate("/admin/appointments/reschedule-appointments")}>  Reschedule
           </Button>
-
         </div>
       </div>
     </div>
-   
+
   );
 };
 
