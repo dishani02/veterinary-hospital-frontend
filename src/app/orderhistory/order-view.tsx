@@ -123,7 +123,7 @@ const OrderView = () => {
       <div className='grid grid-cols-3 gap-x-8 bg-white !p-5 rounded-lg'>
       <div className='col-span-1'>
 
-<div className="max-w-xl mx-auto p-4 bg-white shadow-lg rounded-lg">
+      <div className="max-w-xl mx-auto p-4 bg-white shadow-lg rounded-lg mb-4">
   <h2 className="text-lg font-semibold text-gray-800 mb-4">Purchase Order Details</h2>
   <div className="flex flex-col gap-4">
     <div>
@@ -135,10 +135,6 @@ const OrderView = () => {
       <p className="text-gray-900 text-base">03/13/2023</p>
     </div>
     <div>
-      <h3 className="font-semibold text-gray-700 text-sm">Ordered By</h3>
-      <p className="text-gray-900 text-base">Shamal Wije</p>
-    </div>
-    <div>
       <h3 className="font-semibold text-gray-700 text-sm">Items</h3>
       <p className="text-gray-900 text-base">10</p>
     </div>
@@ -146,9 +142,31 @@ const OrderView = () => {
       <h3 className="font-semibold text-gray-700 text-sm">Total Price</h3>
       <p className="text-gray-900 text-base">Rs. 9500.00</p>
     </div>
-
   </div>
 </div>
+
+<div className="max-w-xl mx-auto p-4 bg-white shadow-lg rounded-lg">
+  <h2 className="text-lg font-semibold text-gray-800 mb-4">Customer Details</h2>
+  <div className="flex flex-col gap-4">
+  <div>
+      <h3 className="font-semibold text-gray-700 text-sm">Ordered By</h3>
+      <p className="text-gray-900 text-base">Shamal Wije</p>
+    </div>
+    <div>
+      <h3 className="font-semibold text-gray-700 text-sm">User email</h3>
+      <p className="text-gray-900 text-base">shaml@gmail.com</p>
+    </div>
+    <div>
+      <h3 className="font-semibold text-gray-700 text-sm">Adderss</h3>
+      <p className="text-gray-900 text-base">Homagama , colombo</p>
+    </div>
+    <div>
+      <h3 className="font-semibold text-gray-700 text-sm">Phone number</h3>
+      <p className="text-gray-900 text-base">0768977656</p>
+    </div>
+  </div>
+</div>
+
 
 </div>
         <div className='col-span-2'>

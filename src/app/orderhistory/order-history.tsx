@@ -1,5 +1,6 @@
 import { Button, Form, Input, Table, Select } from 'antd';
 import { ChevronRight, ListOrdered, Trash2 } from 'lucide-react';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 
 
@@ -7,6 +8,23 @@ const { Option } = Select;
 
 const OrdersHistory = () => {
   const navigate = useNavigate();
+
+  // Fetch orders from the API
+  useEffect(() => {
+    fetch("/api/orders")
+      .then(response => response.json())
+      .then(data => {
+        // Assuming data.payload is an array of orders
+        // We map over the data to include itemCount
+        const ordersWithItemCount = data.payload.map((order: any) => ({
+          ...order,
+          items: order.items.length,  // Add itemCount (length of items array)
+        }));
+        setOrders(ordersWithItemCount);
+      })
+      .catch(error => console.error('Error fetching orders:', error));
+  }, []); // Empty dependency array means this effect runs once when the component mounts
+
 
   const columns = [
     {
@@ -120,3 +138,7 @@ const OrdersHistory = () => {
 }
 
 export default OrdersHistory;
+
+function setOrders(ordersWithItemCount: any) {
+  throw new Error('Function not implemented.');
+}
