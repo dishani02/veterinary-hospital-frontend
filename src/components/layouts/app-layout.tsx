@@ -21,7 +21,7 @@ const AppLayout = () => {
       >
         <div className="flex !p-3 m-auto">
           {/* <h2 className='text-lg text-white text-center'>Pet Paw</h2> */}
-          <img src={logo} alt="Logo" />
+          <img src={logo} alt="Logo" style={{ height: '100px' }} />
 
           </div>
         <Menu
@@ -50,11 +50,6 @@ const AppLayout = () => {
               icon: <Dog size={size} />,
               label: <Link to="/app/pet">Pet profile</Link>
             },
-            // {
-            //   key: 4,
-            //   icon: <ShoppingBag size={size} />,
-            //   label: <Link to="/app/shop">Shop</Link>
-            // },
             {
               key: 4,
               icon: <ShoppingBag size={size} />,
