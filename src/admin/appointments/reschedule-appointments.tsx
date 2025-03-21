@@ -1,22 +1,10 @@
-import { Form, Input, DatePicker, Select, Button } from 'antd';
+import { Form, Input, DatePicker, Select, Button, TimePicker } from 'antd';
 import { Link, useNavigate } from 'react-router';
 import { ChevronRight } from 'lucide-react';
 import moment from 'moment';
-import { useState } from 'react';
 
 const RescheduleAppointment = () => {
   const navigate = useNavigate();
-  const [availableTimes, setAvailableTimes] = useState<string[]>([]);
-
-  const doctorTimeSlots: Record<string, string[]> = {
-    drRoshan: ['09:00 a.m', '10:00 a.m', '11:00 a.m', '14:00 p.m', '16:00 p.m'],
-    drNimali: ['08:30 a.m', '09:30 a.m', '11:00 a.m', '17:00 p.m'],
-    drSaman: ['10:00 a.m', '12:00 p.m', '14:30 p.m', '19:00 p.m'],
-  };
-
-  const handleDoctorChange = (value: string) => {
-    setAvailableTimes(doctorTimeSlots[value] || []);
-  };
 
   const onFinish = (values: any) => {
     console.log('Form values:', values);
@@ -40,16 +28,28 @@ const RescheduleAppointment = () => {
           </Form.Item>
 
           <div className="grid grid-cols-2 gap-6">
-            <Form.Item label="Appointment ID" name="appointmentId">
+            <Form.Item 
+              label="Appointment ID" 
+              name="appointmentId"
+              rules={[{ required: true, message: "Appointment ID is required" }]}
+            >
               <Input className='w-full' placeholder="Enter Appointment ID" readOnly />
             </Form.Item>
 
-            <Form.Item label="Pet Name" name="petName">
+            <Form.Item 
+              label="Pet Name" 
+              name="petName"
+              rules={[{ required: true, message: "Pet Name is required" }]}
+            >
               <Input className='w-full' placeholder="Enter Pet Name" readOnly />
             </Form.Item>
 
-            <Form.Item label="Veterinarian" name="veterinarian">
-              <Select placeholder="Select a Veterinarian" onChange={handleDoctorChange}>
+            <Form.Item 
+              label="Veterinarian" 
+              name="veterinarian"
+              rules={[{ required: true, message: "Please select a Veterinarian" }]}
+            >
+              <Select placeholder="Select a Veterinarian">
                 <Select.Option value="drRoshan">Dr. Roshan Perera</Select.Option>
                 <Select.Option value="drNimali">Dr. Nimali Senanayake</Select.Option>
                 <Select.Option value="drSaman">Dr. Saman Wijesinghe</Select.Option>
@@ -67,12 +67,12 @@ const RescheduleAppointment = () => {
               />
             </Form.Item>
 
-            <Form.Item label="Time" name="time" rules={[{ required: true, message: "Time is required" }]}>
-              <Select placeholder="Select an available time" disabled={availableTimes.length === 0}>
-                {availableTimes.map((time) => (
-                  <Select.Option key={time} value={time}>{time}</Select.Option>
-                ))}
-              </Select>
+            <Form.Item 
+              label="Time" 
+              name="time" 
+              rules={[{ required: true, message: "Time is required" }]}
+            >
+              <TimePicker format="HH:mm" className='w-full' />
             </Form.Item>
           </div>
 
