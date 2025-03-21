@@ -55,7 +55,6 @@ const Appointments = () => {
             onClick={() => handleDelete(record.appointmentId)}
           />
         </div>
-
       )
     }
   ];
