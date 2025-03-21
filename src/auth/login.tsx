@@ -1,12 +1,12 @@
-import React from 'react'
+// import React from 'react'
 
-const Login = () => {
-  return (
-    <div>Login</div>
-  )
-}
+// const Login = () => {
+//   return (
+//     <div>Login</div>
+//   )
+// }
 
-export default Login
+// export default Login
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";

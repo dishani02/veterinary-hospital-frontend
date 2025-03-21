@@ -41,51 +41,65 @@ const Orders = () => {
     },
     {
       key: "action",
-      title: "View",
+      title: "Action(s)",
       dataIndex: "action",
-      render:()=>{
-        return  <Button type="text" htmlType='button'  onClick={() => navigate("/admin/order/view-order")} >  <ListOrdered /></Button>
-   
-      }
-    },
+      width: "20%",
+      render: (_: any, record: { orderId: any; }) => (
+        <div className="flex gap-8 w-full">
+          <Button
+            type="primary"
+            htmlType="button"
+            className="w-24 px-6 py-2 text-lg"
+            //onClick={() => handleCancel(record.orderId)}
+          >
+            Cancel
+          </Button>
+          <Trash2
+            style={{ fontSize: 18, color: 'red', cursor: 'pointer' }}
+            //onClick={() => handleDelete(record.orderId)}
+          />
+        </div>
+
+      )
+    }
   ];
 
   const dataSource: any = [
     {
-      orderId:"OR-1078",
-      date:"25-02-2025",
-      customer:"Shamal Wije",
-      items:"3",
-      price:"Rs.900.00",
-      status:"pending"
-  
+      orderId: "OR-1078",
+      date: "25-02-2025",
+      customer: "Shamal Wije",
+      items: "3",
+      price: "Rs.900.00",
+      status: "pending"
+
     },
     {
-      orderId:"OR-1078",
-      date:"25-02-2025",
-      customer:"Shamal Wije",
-      items:"3",
-      price:"Rs.900.00",
-      status:"pending"
-  
+      orderId: "OR-1078",
+      date: "25-02-2025",
+      customer: "Shamal Wije",
+      items: "3",
+      price: "Rs.900.00",
+      status: "pending"
+
     },
     {
-      orderId:"OR-1078",
-      date:"25-02-2025",
-      customer:"Shamal Wije",
-      items:"3",
-      price:"Rs.900.00",
-      status:"pending"
-  
+      orderId: "OR-1078",
+      date: "25-02-2025",
+      customer: "Shamal Wije",
+      items: "3",
+      price: "Rs.900.00",
+      status: "pending"
+
     },
     {
-      orderId:"OR-1078",
-      date:"25-02-2025",
-      customer:"Shamal Wije",
-      items:"3",
-      price:"Rs.900.00",
-      status:"pending"
-  
+      orderId: "OR-1078",
+      date: "25-02-2025",
+      customer: "Shamal Wije",
+      items: "3",
+      price: "Rs.900.00",
+      status: "pending"
+
     },
   ]
 
@@ -101,21 +115,21 @@ const Orders = () => {
       <h2 className='text-xl font-medium !p-3'>Product Management</h2>
 
       <div className="flex justify-right  gap-6 !p-3">
-        
-      <div
-        className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl 
+
+        <div
+          className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl 
         font-bold rounded-2xl shadow-lg cursor-pointer hover:bg-gray-200 transition-all border border-gray-300"
-        onClick={() => navigate("/admin/products")}
-      >
-        Products
-      </div>
-      <div
-        className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl 
+          onClick={() => navigate("/admin/products")}
+        >
+          Products
+        </div>
+        <div
+          className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl 
         font-bold rounded-2xl shadow-lg cursor-pointer hover:bg-gray-200 transition-all border border-gray-300"
-        onClick={() => navigate("/admin/category")}
-      >
-        Category
-      </div>
+          onClick={() => navigate("/admin/category")}
+        >
+          Category
+        </div>
       </div>
 
       <h2 className="text-xl font-medium whitespace-nowrap !p-2 ">Order Management</h2>
@@ -129,18 +143,27 @@ const Orders = () => {
           />
           <Select className="border p-2 rounded-md w-40">
             <option value="Pending">Pending</option>
-            <option value="Approved">Approved</option>
             <option value="Canceled">Canceled</option>
+            <option value="Canceled">Completed</option>
+            
           </Select>
         </div>
       </div>
 
-      <Table className='!my-5' 
-      columns={columns}
-      dataSource={dataSource} />
+      <Table className='!my-5'
+        columns={columns}
+        dataSource={dataSource} />
     </div>
 
   );
 }
 
 export default Orders;
+function handleDelete(appointmentId: any): void {
+  throw new Error('Function not implemented.');
+}
+
+function handleCancel(appointmentId: any): void {
+  throw new Error('Function not implemented.');
+}
+
