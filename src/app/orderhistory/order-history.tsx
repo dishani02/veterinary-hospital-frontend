@@ -1,31 +1,14 @@
-import { Button, Form, Input, Table, Select } from 'antd';
-import { ChevronRight, ListOrdered, Trash2 } from 'lucide-react';
+import { Button,  Input, Table, Select } from 'antd';
+import { ChevronRight, Trash2 } from 'lucide-react';
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
-
 
 const { Option } = Select;
 
 const OrdersHistory = () => {
   const navigate = useNavigate();
 
-  // Fetch orders from the API
-  useEffect(() => {
-    fetch("/api/orders")
-      .then(response => response.json())
-      .then(data => {
-        // Assuming data.payload is an array of orders
-        // We map over the data to include itemCount
-        const ordersWithItemCount = data.payload.map((order: any) => ({
-          ...order,
-          items: order.items.length,  // Add itemCount (length of items array)
-        }));
-        setOrders(ordersWithItemCount);
-      })
-      .catch(error => console.error('Error fetching orders:', error));
-  }, []); // Empty dependency array means this effect runs once when the component mounts
-
-
+  
   const columns = [
     {
       key: "orderId",
@@ -54,17 +37,27 @@ const OrdersHistory = () => {
     },
     {
       key: "action",
-      title: "View",
+      title: "Action(s)",
       dataIndex: "action",
-      render: () => {
-        return (
-          <Button type="text" htmlType='button' onClick={() => navigate("/app/orderhistory/order-view")}>
-            <ListOrdered />
+      width :"20%",
+      render: (_: any, record: { appointmentId: any; }) => (
+        <div className="flex gap-8 w-full">
+          <Button
+            type="primary"
+            htmlType="button"
+            className="w-24 px-6 py-2 text-lg"
+            onClick={() => handleCancel(record.appointmentId)}
+          >
+            Cancel
           </Button>
-        );
-      }
+          <Trash2
+            style={{ fontSize: 18, color: 'red', cursor: 'pointer' }}
+            onClick={() => handleDelete(record.appointmentId)}
+          />
+        </div>
+
+      )
     }
-    
   ];
 
   const dataSource: any = [
@@ -139,6 +132,14 @@ const OrdersHistory = () => {
 
 export default OrdersHistory;
 
-function setOrders(ordersWithItemCount: any) {
+function setOrders(_ordersWithItemCount: any) {
   throw new Error('Function not implemented.');
 }
+function handleCancel(_appointmentId: any): void {
+  throw new Error('Function not implemented.');
+}
+
+function handleDelete(appointmentId: any) {
+  throw new Error('Function not implemented.');
+}
+
