@@ -1,12 +1,20 @@
 
-import { Link, Outlet } from 'react-router'
+import { Link, Outlet, useNavigate } from 'react-router'
 import { Avatar, Layout, Menu } from 'antd';
-import { Ambulance, ContactRound, FileText, LayoutDashboard, ShoppingBag, Stethoscope, UserRound, Users } from 'lucide-react';
+import { Ambulance, ContactRound, FileText, LayoutDashboard, LogOut, ShoppingBag, Stethoscope, UserRound, Users } from 'lucide-react';
+import { useAppContext } from '../../providers/context-provider';
 
 const AdminLayout = () => {
 
-  const { Header, Content, Footer, Sider } = Layout;
   const size = 18;
+  const { Header, Content, Footer, Sider } = Layout;
+  const { user, logOut } = useAppContext();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logOut();
+    navigate('/auth/login', { replace: true });
+  };
 
   return (
     <Layout>
@@ -58,14 +66,19 @@ const AdminLayout = () => {
               icon:    <FileText size={size}/>,
               label: <Link to="/admin/dashboard">Reports</Link>
             },
+            {
+              key: 7,
+              icon: <LogOut size={size}/>,
+              label: "Logout",
+              onClick: () => handleLogOut()
+            }
           ]} />
       </Sider>
       <Layout>
         <Header className="!bg-white flex justify-end items-center gap-x-4">
-          
           <div className="flex items-center gap-2">
             <Avatar size={35} icon={<UserRound size={14} />} />
-            <h2>Hi, Dishani</h2>
+            <h2>Hi, {user?.name}</h2>
           </div>
         </Header>
         <Content className='!p-5 overflow-y-hidden'>

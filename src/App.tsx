@@ -42,66 +42,109 @@ import ViewServices from "./admin/services/viewservices";
 import AdminDashboard from "./admin/dashboard";
 import Viewproduct from "./admin/order/view-product";
 import Category from "./admin/order/category";
+import { AppContextProvider } from "./providers/context-provider";
+import Login from "./auth/login";
+
+function App() {
+  return (
+    <AppContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="auth" element={<GuestLayout />}>
+            <Route path="login" element={<Login />} />
+          </Route>
+
+          <Route path="app" element={<AppLayout />}>
+            <Route path="user" element={<UserProfile />}></Route>
+            <Route path="dashboard" element={<Dashboard />} />
+
+            <Route path="appointments">
+              <Route index element={<Appointments />} />
+              <Route path="book" element={<BookAppointment />} />
+              <Route path="confirm" element={<AppointmentConfirmation />} />
+            </Route>
+            <Route path="shop">
+              <Route index element={<Shop />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path=":productId" element={<ProductView />} />
+            </Route>
+
+            <Route path="orderhistory">
+              <Route index element={<OrdersHistory />} />
+              <Route path=":orderId" element={<OrderView />} />
+            </Route>
+
+
+            <Route path="pet">
+              <Route index element={<Pet />} />
+              <Route path="add" element={<AddPet />} />
+              <Route path="edit" element={<EditPet />} />
+            </Route>
+            <Route path="services">
+              <Route index element={<ServiceRequests />} />
+              <Route path="new" element={<RequestNewService />} />
+              <Route path="confirm" element={<ServiceConfirmation />} />
+            </Route>
 
 
 
+          </Route>
 
-const API_URL = "http://localhost:5000/api";
+          <Route path="admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
 
-const App: React.FC = () => {
-    const [data, setData] = useState<string>("");
+            <Route path="orders">
+              <Route index element={<Orders />} />
+              <Route path=":orderId" element={<ViewOrder />} />
+            </Route>
 
-    useEffect(() => {
-        axios.get(API_URL)
-            .then(response => {
-                setData(response.data.message);
-            })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-            });
-    }, []);
+            <Route path="products">
+              <Route index element={<Products />} />
+              <Route path="view" element={<Products />} />
+              <Route path="create" element={<CreateProduct />} />
+              <Route path="edit/:productId" element={<EditProduct />} />
+              <Route path="view/:productId" element={<Viewproduct />} />
 
-    return (
-        <BrowserRouter>
-            <div>
-                <h1>Frontend</h1>
-                <p>Data from Backend: {data}</p>
-            </div>
-            <Routes>
-                <Route path="auth" element={<GuestLayout />}>
-                    <Route path="login" element={<UserLogin />} />
-                    <Route path="register" element={<UserRegister />} />
-                </Route>
-                <Route path="app" element={<AppLayout />}>
-                    <Route path="user" element={<UserProfile />} />
-                    <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="appointments">
-                        <Route index element={<Appointments />} />
-                        <Route path="book" element={<BookAppointment />} />
-                        <Route path="confirm" element={<AppointmentConfirmation />} />
-                    </Route>
-                    <Route path="shop">
-                        <Route index element={<Shop />} />
-                        <Route path="cart" element={<Cart />} />
-                        <Route path=":productId" element={<ProductView />} />
-                    </Route>
-                </Route>
-                <Route path="admin" element={<AdminLayout />}>
-                    <Route path="dashboard" element={<AdminDashboard />} />
-                    <Route path="orders">
-                        <Route index element={<Orders />} />
-                        <Route path=":orderId" element={<ViewOrder />} />
-                    </Route>
-                    <Route path="products">
-                        <Route index element={<Products />} />
-                        <Route path="view/:productId" element={<Viewproduct />} />
-                        <Route path="create" element={<CreateProduct />} />
-                        <Route path="edit/:productId" element={<EditProduct />} />
-                    </Route>
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    );
-};
+            </Route>
+
+
+            <Route path="category">
+              <Route index element={<Category />} />
+              <Route path="view" element={<Category />} />
+            </Route>
+
+            <Route path="user-pet">
+              <Route index element={<Users />} />
+            </Route>
+
+            <Route path="staff">
+              <Route index element={<Staff />} />
+              <Route path=":staffId" element={<ViewStaff />} />
+              <Route path="add" element={<AddStaff />} />
+              <Route path="edit" element={<EditStaff />} />
+            </Route>
+
+            <Route path="appointments">
+              <Route index element={<AdminAppointments />} />
+              <Route path=":appointmentId" element={<ViewAppointment />} />
+              <Route path="reschedule-appointments" element={<RescheduleAppointment />} />
+            </Route>
+
+            <Route path="order">
+              <Route index element={<ViewOrder />} />
+              <Route path=":orderid" element={<ViewOrder />} />
+            </Route>
+
+            <Route path="services">
+              <Route index element={<Services />} />
+              <Route path=":serviceId" element={<ViewServices />} />
+            </Route>
+
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AppContextProvider>
+  );
+}
 
 export default App;

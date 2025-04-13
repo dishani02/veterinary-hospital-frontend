@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, Button, Avatar, List } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 
 
@@ -11,5 +10,9 @@ const Dashboard: React.FC = () => {
       
       </div>
 
-  )}
+
+    
+  );
+};
+
 export default Dashboard;

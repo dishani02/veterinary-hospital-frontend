@@ -1,7 +1,7 @@
 
-import { Link, Outlet } from 'react-router'
+import { Link, Outlet, useNavigate } from 'react-router'
 import { Avatar, Badge, Layout, Menu } from 'antd';
-import { Ambulance, CircleDollarSign, Dog, LayoutDashboard, ShoppingBag, ShoppingCart, Stethoscope, UserRound, UserRoundCog } from 'lucide-react';
+import { Ambulance, CircleDollarSign, Dog, LayoutDashboard, LogOut, ShoppingBag, ShoppingCart, Stethoscope, UserRound, UserRoundCog } from 'lucide-react';
 import { useAppContext } from '../../providers/context-provider';
 import logo from "../../assets/img/logo.png"; 
 
@@ -11,7 +11,13 @@ const AppLayout = () => {
   const { Header, Content, Footer, Sider } = Layout;
   const size = 18;
 
-  const { cart } = useAppContext();
+  const navigate = useNavigate();
+  const { cart, user, logOut } = useAppContext();
+
+  const handleLogOut = () => {
+    logOut();
+    navigate('/auth/login', { replace: true });
+  };
 
   return (
     <Layout>
@@ -76,7 +82,12 @@ const AppLayout = () => {
               icon: <UserRoundCog size={size} />,
               label: <Link to="/app/user">Profile Setting</Link>
             },
-
+            {
+              key: 7,
+              icon: <LogOut size={size}/>,
+              label: "Logout",
+              onClick: () => handleLogOut()
+            }
           ]} />
       </Sider>
       <Layout>
@@ -88,7 +99,7 @@ const AppLayout = () => {
           </Link>
           <div className="flex items-center gap-2">
             <Avatar size={35} icon={<UserRound size={14} />} />
-            <h2>Hi, Dishani</h2>
+            <h2>Hi, {user?.name}</h2>
           </div>
         </Header>
         <Content className='!p-5 overflow-y-hidden'>
