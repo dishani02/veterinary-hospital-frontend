@@ -2,13 +2,7 @@ import React from "react";
 import { Card, Button, Avatar, List } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
-const weightData = [
-  { name: "Mon", weight: 15 },
-  { name: "Tue", weight: 16 },
-  { name: "Wed", weight: 15.8 },
-  { name: "Thu", weight: 16.2 },
-  { name: "Fri", weight: 16.5 },
-];
+
 
 const Dashboard: React.FC = () => {
   return (

@@ -1,9 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import AppLayout from './components/layouts/app-layout';
 import GuestLayout from './components/layouts/guest-layout';
-import Login from "./auth/login";
-
-//customer pages
+import AdminLayout from "./components/layouts/admin-layout";
+import UserLogin from "./auth/login";
+import UserRegister from "./auth/register";
+// Customer Pages
 import Dashboard from "./app/dashboard";
 import Appointments from "./app/appointments/appointments";
 import BookAppointment from "./app/appointments/book-appointment";
@@ -14,18 +17,13 @@ import ProductView from "./app/shop/product-view";
 import Pet from "./app/pet/pet";
 import AddPet from "./app/pet/addpet";
 import EditPet from "./app/pet/editpet";
-import MedicalHistory from "./app/pet/medicalhistory";
 import UserProfile from "./app/userprofile";
 import ServiceRequests from "./app/services/services";
 import RequestNewService from "./app/services/requestnewservice";
 import ServiceConfirmation from "./app/services/serviceconfirmation";
 import OrdersHistory from "./app/orderhistory/order-history";
 import OrderView from "./app/orderhistory/order-view";
-
-
-
-
-//admin pages
+// Admin Pages
 import Orders from "./admin/order/orders";
 import ViewOrder from "./admin/order/view-order";
 import Products from "./admin/order/products";
@@ -42,10 +40,10 @@ import RescheduleAppointment from "./admin/appointments/reschedule-appointments"
 import Services from "./admin/services/services";
 import ViewServices from "./admin/services/viewservices";
 import AdminDashboard from "./admin/dashboard";
-import AdminLayout from "./components/layouts/admin-layout";
 import Viewproduct from "./admin/order/view-product";
 import Category from "./admin/order/category";
 import { AppContextProvider } from "./providers/context-provider";
+import Login from "./auth/login";
 
 function App() {
   return (
@@ -65,8 +63,6 @@ function App() {
               <Route path="book" element={<BookAppointment />} />
               <Route path="confirm" element={<AppointmentConfirmation />} />
             </Route>
-
-
             <Route path="shop">
               <Route index element={<Shop />} />
               <Route path="cart" element={<Cart />} />
