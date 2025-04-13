@@ -3,14 +3,50 @@ import TextArea from 'antd/es/input/TextArea';
 import { ChevronRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useAppContext } from '../../providers/context-provider';
 
 const BookAppointment = () => {
   const navigate = useNavigate();
+  const { user } = useAppContext();
 
   const onFinish = (values: any) => {
     console.log("Form Submitted:", values);
     navigate("/app/appointments/confirm");
   };
+
+  const [doctors, setDoctors] = useState([]);
+  const [pets, setPets] = useState([]);
+
+  useEffect(() => {
+    const getDoctors = async() => {
+      await axios.get(`${import.meta.env.VITE_BASE_URL}/doctor`, {
+        headers: {
+          Authorization: `Bearer ${user?.accessToken}`
+        }
+      }).then((res) => {
+        setDoctors(res.data);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+
+    const getPets = async () => {
+      await axios.get(`${import.meta.env.VITE_BASE_URL}/pets`, {
+        headers: {
+          Authorization: `Bearer ${user?.accessToken}`
+        }
+      }).then((res) => {
+        setPets(res.data);
+      }).catch((err) => {
+        console.log(err);
+      });
+    };
+
+    getDoctors();
+    getPets();
+  }, []);
 
   return (
     <div className='!space-y-4'>
@@ -29,7 +65,9 @@ const BookAppointment = () => {
             name="pet"
             rules={[{ required: true, message: "Pet is required" }]}>
             <Select placeholder="Select the Pet">
-              <Select.Option value="cat"> Cat</Select.Option>
+            {pets.map((pet: any) => (
+                <Select.Option key={pet._id} value={pet._id}>{pet.name}</Select.Option>
+              ))}
             </Select>
           </Form.Item>
           <Form.Item
@@ -37,8 +75,9 @@ const BookAppointment = () => {
             name="doctor"
             rules={[{ required: true, message: "Doctor is required" }]}>
             <Select placeholder="Select the Doctor">
-              <Select.Option value="Dr.Roshan Perera">Dr. Roshan Perera</Select.Option>
-              <Select.Option value="Dr.Amali Perera">Dr. Amali Perera</Select.Option>
+              {doctors.map((doctor: any) => (
+                <Select.Option key={doctor._id} value={doctor._id}>{doctor.name}</Select.Option>
+              ))}
             </Select>
           </Form.Item>
           <Form.Item
