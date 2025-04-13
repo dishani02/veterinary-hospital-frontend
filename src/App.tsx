@@ -1,11 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router";
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import AppLayout from './components/layouts/app-layout';
 import GuestLayout from './components/layouts/guest-layout';
 import AdminLayout from "./components/layouts/admin-layout";
-import UserLogin from "./auth/login";
-import UserRegister from "./auth/register";
+
 // Customer Pages
 import Dashboard from "./app/dashboard";
 import Appointments from "./app/appointments/appointments";
@@ -23,6 +20,7 @@ import RequestNewService from "./app/services/requestnewservice";
 import ServiceConfirmation from "./app/services/serviceconfirmation";
 import OrdersHistory from "./app/orderhistory/order-history";
 import OrderView from "./app/orderhistory/order-view";
+
 // Admin Pages
 import Orders from "./admin/order/orders";
 import ViewOrder from "./admin/order/view-order";
@@ -63,6 +61,7 @@ function App() {
               <Route path="book" element={<BookAppointment />} />
               <Route path="confirm" element={<AppointmentConfirmation />} />
             </Route>
+
             <Route path="shop">
               <Route index element={<Shop />} />
               <Route path="cart" element={<Cart />} />
@@ -74,20 +73,17 @@ function App() {
               <Route path=":orderId" element={<OrderView />} />
             </Route>
 
-
             <Route path="pet">
               <Route index element={<Pet />} />
               <Route path="add" element={<AddPet />} />
               <Route path="edit" element={<EditPet />} />
             </Route>
+
             <Route path="services">
               <Route index element={<ServiceRequests />} />
               <Route path="new" element={<RequestNewService />} />
               <Route path="confirm" element={<ServiceConfirmation />} />
             </Route>
-
-
-
           </Route>
 
           <Route path="admin" element={<AdminLayout />}>
@@ -104,9 +100,7 @@ function App() {
               <Route path="create" element={<CreateProduct />} />
               <Route path="edit/:productId" element={<EditProduct />} />
               <Route path="view/:productId" element={<Viewproduct />} />
-
             </Route>
-
 
             <Route path="category">
               <Route index element={<Category />} />
@@ -139,7 +133,6 @@ function App() {
               <Route index element={<Services />} />
               <Route path=":serviceId" element={<ViewServices />} />
             </Route>
-
           </Route>
         </Routes>
       </BrowserRouter>

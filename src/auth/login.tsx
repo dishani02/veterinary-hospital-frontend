@@ -41,7 +41,7 @@ const UserLogin: React.FC = () => {
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">User Login</h2>
         <Form onFinish={handleLogin} className="space-y-2" layout="vertical" initialValues={{
-          email: "admin@admin.com",
+          email: "shamal@gmail.com",
           password: "123"
         }}>
           <Form.Item
