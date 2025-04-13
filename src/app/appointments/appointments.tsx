@@ -1,31 +1,103 @@
-import { Button, Input, Table } from 'antd';
+import { Button, Input, message, Table } from 'antd';
 import { ChevronRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
 import { DeleteOutlined } from '@ant-design/icons';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useAppContext } from '../../providers/context-provider';
+import dayjs from 'dayjs';
 
 const Appointments = () => {
   const navigate = useNavigate();
+  const { user } = useAppContext();
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [appointments, setAppointments] = useState<any[]>([]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const getAppointments = async () => {
+      setLoading(true);
+      await axios.get(`${import.meta.env.VITE_BASE_URL}/appointment/appointment-history`, {
+        headers: {
+          Authorization: `Bearer ${user?.accessToken}`
+        }
+      }).then((res) => {
+        setAppointments(res.data.payload);
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setLoading(false);
+      })
+    };
+
+    getAppointments();
+
+    return () => {
+      controller.abort();
+    }
+  }, []);
+
+  const handleDeleteAppointment = async (appointmentId: string) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_BASE_URL}/appointment/${appointmentId}`, {
+        headers: {
+          Authorization: `Bearer ${user?.accessToken}`
+        }
+      }).then((res: any) => {
+        if (res.status === 200) {
+          message.success("Appointment successfully deleted!");
+        }
+      }).catch((err) => {
+        console.error(err);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleCancelAppointment = async (appointmentId: string) => {
+    try {
+      await axios.patch(`${import.meta.env.VITE_BASE_URL}/appointment/${appointmentId}/cancel`, {}, {
+        headers: {
+          Authorization: `Bearer ${user?.accessToken}`
+        }
+      }).then((res: any) => {
+        if (res.status === 200) {
+          message.success("Appointment successfully cancelled!");
+        }
+      }).catch((err) => {
+        console.error(err);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const columns = [
     {
-      key: "appointmentId",
+      key: "_id",
       title: "Appointment Id",
-      dataIndex: "appointmentId"
+      dataIndex: "_id"
     },
     {
-      key: "petName",
+      key: "pet",
       title: "Pet Name",
-      dataIndex: "petName"
+      dataIndex: "pet",
+      render: (value: any) => value.name || "N/A"
     },
     {
       key: "veterinarian",
       title: "Veterinarian",
-      dataIndex: "veterinarian"
+      dataIndex: "veterinarian",
+      render: (value: any) => value.name || "N/A"
     },
     {
       key: "date",
       title: "Date",
-      dataIndex: "date"
+      dataIndex: "date",
+      render: (value: string) => dayjs(value).format("YYYY-MM-DD")
     },
     {
       key: "time",
@@ -40,44 +112,13 @@ const Appointments = () => {
     {
       key: "action",
       title: "Action(s)",
-      render: (_: any, record: { appointmentId: any; }) => (
-        <div className="flex gap-8 w-full">
-          <Button
-            type="primary"
-            htmlType="button"
-            className="w-24 px-6 py-2 text-lg"
-            onClick={() => handleCancel(record.appointmentId)}
-          >
-            Cancel
-          </Button>
-          <DeleteOutlined
-            style={{ fontSize: 18, color: 'red', cursor: 'pointer' }}
-            onClick={() => handleDelete(record.appointmentId)}
-          />
+      render: (_: any, record: any) => (
+        <div className="flex gap-4 w-full">
+          <Button htmlType="button" variant="outlined" icon={<DeleteOutlined />} onClick={() => handleCancelAppointment(record._id)} />
+          <Button htmlType="button" danger icon={<DeleteOutlined />} onClick={() => handleDeleteAppointment(record._id)} />
         </div>
       )
     }
-  ];
-
-  const data = [
-    {
-      key: '1',
-      appointmentId: 'A001',
-      petName: 'SAM',
-      veterinarian: 'Dr. Amali Senanyaka',
-      date: '2025-03-20',
-      time: '04.00',
-      status: 'Pending'
-    },
-    {
-      key: '2',
-      appointmentId: 'A002',
-      petName: 'Luna',
-      veterinarian: 'Dr. Roshan Perera',
-      date: '2025-03-22',
-      time: '05.00',
-      status: 'Pending'
-    },
   ];
 
   return (
@@ -102,8 +143,9 @@ const Appointments = () => {
         <Table
           className='!my-5'
           columns={columns}
-          dataSource={data}
+          dataSource={appointments}
           pagination={false}
+          loading={loading}
         />
       </div>
     </div>

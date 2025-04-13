@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Select, TimePicker } from 'antd';
+import { Button, DatePicker, Form, message, Select, TimePicker } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { ChevronRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,21 +6,20 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAppContext } from '../../providers/context-provider';
+import dayjs from 'dayjs';
 
 const BookAppointment = () => {
   const navigate = useNavigate();
   const { user } = useAppContext();
 
-  const onFinish = (values: any) => {
-    console.log("Form Submitted:", values);
-    navigate("/app/appointments/confirm");
-  };
-
-  const [doctors, setDoctors] = useState([]);
-  const [pets, setPets] = useState([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [doctors, setDoctors] = useState<any[]>([]);
+  const [pets, setPets] = useState<any[]>([]);
 
   useEffect(() => {
-    const getDoctors = async() => {
+    const controller = new AbortController();
+
+    const getDoctors = async () => {
       await axios.get(`${import.meta.env.VITE_BASE_URL}/doctor`, {
         headers: {
           Authorization: `Bearer ${user?.accessToken}`
@@ -28,7 +27,7 @@ const BookAppointment = () => {
       }).then((res) => {
         setDoctors(res.data);
       }).catch((err) => {
-        console.log(err);
+        console.error(err);
       });
     }
 
@@ -38,15 +37,44 @@ const BookAppointment = () => {
           Authorization: `Bearer ${user?.accessToken}`
         }
       }).then((res) => {
-        setPets(res.data);
+        setPets(res.data.payload);
       }).catch((err) => {
-        console.log(err);
+        console.error(err);
       });
     };
 
     getDoctors();
     getPets();
+
+    return () => {
+      controller.abort();
+    }
   }, []);
+
+  const onFinish = async (values: any) => {
+    if (values.date) values.date = dayjs(values.date).format("YYYY-MM-DD");
+    if (values.time) values.time = dayjs(values.time).format("HH:mm");
+
+    try {
+      setLoading(true);
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/appointment`, values, {
+        headers: {
+          Authorization: `Bearer ${user?.accessToken}`
+        }
+      }).then((res: any) => {
+        if (res.status === 201) {
+          message.success("Appointment successfully created!");
+          navigate("/app/appointments/confirm", { replace: true });
+        }
+      }).catch((err) => {
+        console.error(err);
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className='!space-y-4'>
@@ -62,20 +90,20 @@ const BookAppointment = () => {
         <div className="grid grid-cols-2 gap-2">
           <Form.Item
             label="Pet"
-            name="pet"
+            name="petId"
             rules={[{ required: true, message: "Pet is required" }]}>
             <Select placeholder="Select the Pet">
-            {pets.map((pet: any) => (
+              {pets && pets.map((pet: any) => (
                 <Select.Option key={pet._id} value={pet._id}>{pet.name}</Select.Option>
               ))}
             </Select>
           </Form.Item>
           <Form.Item
             label="Doctor"
-            name="doctor"
+            name="doctorId"
             rules={[{ required: true, message: "Doctor is required" }]}>
             <Select placeholder="Select the Doctor">
-              {doctors.map((doctor: any) => (
+              {doctors && doctors.map((doctor: any) => (
                 <Select.Option key={doctor._id} value={doctor._id}>{doctor.name}</Select.Option>
               ))}
             </Select>
@@ -114,7 +142,7 @@ const BookAppointment = () => {
           </div>
         </div>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={loading}>
             Book Appointment
           </Button>
         </Form.Item>
