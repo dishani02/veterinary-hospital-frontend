@@ -1,4 +1,4 @@
-import { Button, Input, message, Table } from 'antd';
+import { Button, Input, message, Modal, Table } from 'antd';
 import { ChevronRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
 import { DeleteOutlined } from '@ant-design/icons';
@@ -12,7 +12,12 @@ const Appointments = () => {
   const { user } = useAppContext();
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
+  const [cancelLoading, setCancelLoading] = useState<boolean>(false);
+
   const [appointments, setAppointments] = useState<any[]>([]);
+  const [deleteAppointmentId, setDeleteAppointmentId] = useState<string | undefined>("");
+  const [cancelAppointmentId, setCancelAppointmentId] = useState<string | undefined>("");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -26,7 +31,7 @@ const Appointments = () => {
       }).then((res) => {
         setAppointments(res.data.payload);
       }).catch((err) => {
-        console.log(err);
+        console.error(err);
       }).finally(() => {
         setLoading(false);
       })
@@ -39,8 +44,10 @@ const Appointments = () => {
     }
   }, []);
 
-  const handleDeleteAppointment = async (appointmentId: string) => {
+  const handleDeleteAppointment = async (appointmentId?: string) => {
+    if (!appointmentId) return;
     try {
+      setDeleteLoading(true);
       await axios.delete(`${import.meta.env.VITE_BASE_URL}/appointment/${appointmentId}`, {
         headers: {
           Authorization: `Bearer ${user?.accessToken}`
@@ -48,17 +55,20 @@ const Appointments = () => {
       }).then((res: any) => {
         if (res.status === 200) {
           message.success("Appointment successfully deleted!");
+          setDeleteAppointmentId(undefined);
         }
-      }).catch((err) => {
-        console.error(err);
-      });
+      })
     } catch (error) {
       console.error(error);
+    } finally {
+      setDeleteLoading(false);
     }
   };
 
-  const handleCancelAppointment = async (appointmentId: string) => {
+  const handleCancelAppointment = async (appointmentId?: string) => {
+    if(!appointmentId) return;
     try {
+      setCancelLoading(true);
       await axios.patch(`${import.meta.env.VITE_BASE_URL}/appointment/${appointmentId}/cancel`, {}, {
         headers: {
           Authorization: `Bearer ${user?.accessToken}`
@@ -67,11 +77,11 @@ const Appointments = () => {
         if (res.status === 200) {
           message.success("Appointment successfully cancelled!");
         }
-      }).catch((err) => {
-        console.error(err);
-      });
+      })
     } catch (error) {
       console.error(error);
+    } finally {
+      setCancelLoading(false);
     }
   }
 
@@ -113,9 +123,9 @@ const Appointments = () => {
       key: "action",
       title: "Action(s)",
       render: (_: any, record: any) => (
-        <div className="flex gap-4 w-full">
-          <Button htmlType="button" variant="outlined" icon={<DeleteOutlined />} onClick={() => handleCancelAppointment(record._id)} />
-          <Button htmlType="button" danger icon={<DeleteOutlined />} onClick={() => handleDeleteAppointment(record._id)} />
+        <div className="flex gap-x-2 w-full">
+          <Button htmlType="button" variant="outlined" icon={<DeleteOutlined />} onClick={() => setCancelAppointmentId(record._id)} />
+          <Button htmlType="button" danger icon={<DeleteOutlined />} onClick={() => setDeleteAppointmentId(record._id)} />
         </div>
       )
     }
@@ -147,19 +157,43 @@ const Appointments = () => {
           pagination={false}
           loading={loading}
         />
+
+        <Modal
+          open={!!deleteAppointmentId}
+          centered={true}
+          title="Delete Appointment"
+          okText="Yes, delete"
+          onOk={() => handleDeleteAppointment(deleteAppointmentId)}
+          onCancel={() => setDeleteAppointmentId(undefined)}
+          onClose={() => setDeleteAppointmentId(undefined)}
+          okButtonProps={{
+            loading: deleteLoading
+          }}
+        >
+          <div className='flex flex-col bg-gray-100 rounded p-3'>
+            <h2>Are you sure to delete this appointment ? Once you delete this, cannot be undone.</h2>
+          </div>
+        </Modal>
+
+        <Modal
+          open={!!cancelAppointmentId}
+          centered={true}
+          title="Cancel Appointment"
+          okText="Yes, cancel"
+          onOk={() => handleCancelAppointment(cancelAppointmentId)}
+          onCancel={() => setCancelAppointmentId(undefined)}
+          onClose={() => setCancelAppointmentId(undefined)}
+          okButtonProps={{
+            loading: cancelLoading
+          }}
+        >
+          <div className='flex flex-col bg-gray-100 rounded p-3'>
+            <h2>Are you sure to cancel this appointment ? Once you cancel this, cannot be undone.</h2>
+          </div>
+        </Modal>
       </div>
     </div>
   );
 }
 
 export default Appointments;
-
-function handleCancel(appointmentId: any): void {
-  throw new Error('Function not implemented.');
-}
-
-// Function to handle the delete action
-function handleDelete(appointmentId: any): void {
-  console.log(`Deleting appointment with ID: ${appointmentId}`);
-  // Add the delete logic here, like removing the appointment from the state or calling an API.
-}

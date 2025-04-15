@@ -141,11 +141,11 @@ const BookAppointment = () => {
             </Form.Item>
           </div>
         </div>
-        <Form.Item>
+  
           <Button type="primary" htmlType="submit" loading={loading}>
             Book Appointment
           </Button>
-        </Form.Item>
+    
       </Form>
     </div>
   );
