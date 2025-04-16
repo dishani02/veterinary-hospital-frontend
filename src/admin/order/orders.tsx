@@ -285,7 +285,7 @@ const Orders = () => {
     {
       key: 'price',
       title: 'Price',
-      dataIndex: 'price', // ✅ Fixed from 'total' to 'price'
+      dataIndex: 'price', 
       render: (value: number) => (value ? `Rs.${value.toFixed(2)}` : 'N/A'),
     },
     {
