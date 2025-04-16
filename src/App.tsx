@@ -120,14 +120,14 @@ function App() {
 
             <Route path="appointments">
               <Route index element={<AdminAppointments />} />
-              <Route path=":appointmentId" element={<ViewAppointment />} />
+              <Route path="/admin/appointments/view-appointment/:appointmentId" element={<ViewAppointment />} />
               <Route path="reschedule-appointments" element={<RescheduleAppointment />} />
             </Route>
 
             <Route path="order">
               <Route index element={<ViewOrder />} />
-              <Route path=":orderid" element={<ViewOrder />} />
-            </Route>
+              <Route path="/admin/order/view-order/:orderId" element={<ViewOrder />} />
+              </Route>
 
             <Route path="services">
               <Route index element={<Services />} />
