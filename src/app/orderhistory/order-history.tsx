@@ -1,47 +1,57 @@
-import { Button, Input, message, Table, Select } from 'antd';
+
+import { Button, Input, Table, Select, message } from 'antd';
 import { ChevronRight, ListOrdered, Trash2 } from 'lucide-react';
-import { Link, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { useAppContext } from '../../providers/context-provider';
+import { useNavigate } from 'react-router';
 
 const { Option } = Select;
 
-const Orders = () => {
-  const navigate = useNavigate();
+const OrdersHistory = () => {
   const { user } = useAppContext();
+  const navigate = useNavigate();
 
-  const [loading, setLoading] = useState<boolean>(false);
   const [orders, setOrders] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const controller = new AbortController();
 
-    const getOrders = async () => {
+    const fetchOrders = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/order/order-history`, {
-          headers: {
-            Authorization: `Bearer ${user?.accessToken}`,
-          },
-          signal: controller.signal,
-        });
-        setOrders(res.data.payload || []);
-      } catch (err) {
-        console.error(err);
+        const res = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/order/order-history`,
+          {
+            headers: {
+              Authorization: `Bearer ${user?.accessToken}`,
+            },
+            signal: controller.signal,
+          }
+        );
+
+        const dataWithItemCount = res.data.payload?.map((order: any) => ({
+          ...order,
+          items: order.items?.length || 0,
+        })) || [];
+
+        setOrders(dataWithItemCount);
+      } catch (error) {
+        console.error(error);
         message.error('Failed to load order history.');
       } finally {
         setLoading(false);
       }
     };
 
-    getOrders();
-
+    fetchOrders();
     return () => controller.abort();
   }, [user]);
 
-  const handleCancelOrder = async (orderId: string) => {
+  const handleCancel = async (orderId: string) => {
     try {
       const res = await axios.patch(
         `${import.meta.env.VITE_BASE_URL}/order/${orderId}/cancel`,
@@ -52,10 +62,13 @@ const Orders = () => {
           },
         }
       );
+
       if (res.status === 200) {
-        message.success('Order successfully cancelled!');
+        message.success('Order cancelled successfully.');
         setOrders((prev) =>
-          prev.map((o) => (o._id === orderId ? { ...o, status: 'cancelled' } : o))
+          prev.map((order) =>
+            order._id === orderId ? { ...order, status: 'cancelled' } : order
+          )
         );
       }
     } catch (error) {
@@ -64,16 +77,20 @@ const Orders = () => {
     }
   };
 
-  const handleDeleteOrder = async (orderId: string) => {
+  const handleDelete = async (orderId: string) => {
     try {
-      const res = await axios.delete(`${import.meta.env.VITE_BASE_URL}/order/${orderId}`, {
-        headers: {
-          Authorization: `Bearer ${user?.accessToken}`,
-        },
-      });
+      const res = await axios.delete(
+        `${import.meta.env.VITE_BASE_URL}/order/${orderId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user?.accessToken}`,
+          },
+        }
+      );
+
       if (res.status === 200) {
-        message.success('Order successfully deleted!');
-        setOrders((prev) => prev.filter((o) => o._id !== orderId));
+        message.success('Order deleted successfully.');
+        setOrders((prev) => prev.filter((order) => order._id !== orderId));
       }
     } catch (error) {
       console.error(error);
@@ -84,32 +101,25 @@ const Orders = () => {
   const columns = [
     {
       key: '_id',
-      title: 'Order Id',
+      title: 'Order ID',
       dataIndex: '_id',
     },
     {
       key: 'date',
       title: 'Date',
       dataIndex: 'date',
-      render: (value: string) => (value ? dayjs(value).format('YYYY-MM-DD') : 'N/A'),
-    },
-    {
-      key: 'customer',
-      title: 'Customer',
-      dataIndex: 'customer',
-      render: (value: any) => value?.name,
+      render: (value: string) => value ? dayjs(value).format('YYYY-MM-DD') : 'N/A',
     },
     {
       key: 'items',
-      title: 'Items',
+      title: 'Total Items',
       dataIndex: 'items',
-      render: (items: any[]) => items?.length || 0,
     },
     {
       key: 'price',
-      title: 'Price',
-      dataIndex: 'price', 
-      render: (value: number) => (value ? `Rs.${value.toFixed(2)}` : 'N/A'),
+      title: 'Total Price',
+      dataIndex: 'price',
+      render: (value: number) => value ? `Rs.${value.toFixed(2)}` : 'N/A',
     },
     {
       key: 'status',
@@ -118,19 +128,22 @@ const Orders = () => {
     },
     {
       key: 'action',
-      title: 'Action(s)',
+      title: 'Actions',
       render: (_: any, record: any) => (
-        <div className="flex gap-8 w-full">
+        <div className="flex gap-4">
           <Button
             type="primary"
-            htmlType="button"
-            className="w-24 px-6 py-2 text-lg"
-            onClick={() => handleCancelOrder(record._id)}
+            size='middle'
+            onClick={() => handleCancel(record._id)}
             disabled={record.status.toLowerCase() === 'cancelled'}
           >
             Cancel
           </Button>
-          <Button
+          <Trash2
+            style={{ fontSize: 18, color: 'red', cursor: 'pointer' }}
+            onClick={() => handleDelete(record._id)}
+          />
+           <Button
             type="text"
             htmlType="button"
             onClick={() => navigate(`/admin/order/view-order/${record._id}`)}
@@ -138,12 +151,8 @@ const Orders = () => {
           >
             <ListOrdered />
           </Button>
-          <Trash2
-            style={{ fontSize: 18, color: 'red', cursor: 'pointer' }}
-            onClick={() => handleDeleteOrder(record._id)}
-          />
         </div>
-      )
+      ),
     },
   ];
 
@@ -154,39 +163,21 @@ const Orders = () => {
           Home
         </Link>
         <ChevronRight size={16} />
-        <h2>Orders</h2>
+        <h2>Order History</h2>
       </div>
-
-      <h2 className="text-xl font-medium !p-3">Product Management</h2>
-
-      <div className="flex justify-right gap-6 !p-3">
-        <div
-          className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl font-bold 
-          rounded-2xl shadow-lg cursor-pointer hover:bg-gray-200 transition-all border border-gray-300"
-          onClick={() => navigate('/admin/products')}
-        >
-          Products
-        </div>
-        <div
-          className="w-64 h-30 bg-white text-black flex justify-center items-center text-xl font-bold 
-          rounded-2xl shadow-lg cursor-pointer hover:bg-gray-200 transition-all border border-gray-300"
-          onClick={() => navigate('/admin/category')}
-        >
-          Category
-        </div>
-      </div>
-
-      <h2 className="text-xl font-medium whitespace-nowrap !p-2">Order Management</h2>
 
       <div className="flex justify-between items-center">
         <h2 className="text-lg whitespace-nowrap gap-5">Order List</h2>
         <div className="flex gap-4">
-          <Input placeholder="Search by order number" className="border p-2 rounded-md w-64" />
+          <Input
+            placeholder="Search by Order ID"
+            className="border p-2 rounded-md w-64"
+          />
           <Select className="border p-2 rounded-md w-40" defaultValue="All">
             <Option value="All">All</Option>
             <Option value="Pending">Pending</Option>
-            <Option value="Cancelled">Cancelled</Option>
             <Option value="Completed">Completed</Option>
+            <Option value="Cancelled">Cancelled</Option>
           </Select>
         </div>
       </div>
@@ -203,4 +194,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default OrdersHistory;

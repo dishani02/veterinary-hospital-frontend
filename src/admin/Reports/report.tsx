@@ -16,7 +16,7 @@ const Viewproduct = () => {
                 <ChevronRight size={16} />
                 <Link to="/admin/products" className='!text-black'>Product</Link>
                 <ChevronRight size={16} />
-                <h2>15 kg Pedigree Pet Food, Packaging Type: Packet</h2>
+                <h2>15 kg Pedigree Pet Food, Packaging Type: </h2>
             </div>
 
 
@@ -61,8 +61,6 @@ const Viewproduct = () => {
                                     <Select.Option value="l">L</Select.Option>
                                     <Select.Option value="ml">mL</Select.Option>
                                     <Select.Option value="small">Small</Select.Option>
-                                    <Select.Option value="medium">Medium</Select.Option>
-                                    <Select.Option value="large">Large</Select.Option>
                                 </Select>
                             </Form.Item>
 
